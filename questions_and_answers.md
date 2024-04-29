@@ -142,4 +142,121 @@ White|4475
 30 or more|White|107
 ```
 
+Reasons for Referrals:
+
+1) Top 10 Reasons Pre-K through 3rd grade students received referral.
+
+```
+SELECT eventName, count(*)
+FROM disc
+WHERE Grade IN ('PK', 'KG', 1, 2, 3)
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 10;
+
+Classroom Disruption/Behavior Disruptive to the School Environment|7671
+Insubordination/Non-compliance with behavioral expectations|2225
+Disrespectful to Adults/Others|2215
+Reckless Behavior|1529
+Assault, No Injury|1174
+Fighting, Less Serious|747
+Assault to Staff|409
+Violation of other Defined School Rules|399
+No Behavior Event/Documentation|386
+Repeated Violations|355
+```
+
+2) Top 10 Reasons 4th through 6th grade students received referral.
+
+```
+SELECT eventName, count(*)
+FROM disc
+WHERE Grade IN (4, 5, 6)
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 10;
+
+Classroom Disruption/Behavior Disruptive to the School Environment|7600
+Insubordination/Non-compliance with behavioral expectations|3543
+Disrespectful to Adults/Others|3479
+No Behavior Event/Documentation|2753
+Excessive Tardies/Hall Sweep|1570
+Reckless Behavior|1511
+Fighting, Less Serious|1275
+Assault, No Injury|674
+Misuse of Pass/Out of Area|591
+Inappropriate Language|591
+```
+
+3) Top 10 Reasons Pre-K through 3rd grade students received referral by race.
+
+```
+./by_race.pl
+African American|Classroom Disruption/Behavior Disruptive to the School Environment|4140
+African American|Insubordination/Non-compliance with behavioral expectations|1200
+African American|Disrespectful to Adults/Others|1167
+African American|Reckless Behavior|859
+African American|Assault, No Injury|608
+African American|Fighting, Less Serious|436
+African American|Violation of other Defined School Rules|243
+African American|Repeated Violations|191
+African American|Assault to Staff|188
+African American|Assault with Injury (Intentional)|153
+Asian|Classroom Disruption/Behavior Disruptive to the School Environment|75
+Asian|Disrespectful to Adults/Others|33
+Asian|Assault, No Injury|23
+Asian|No Behavior Event/Documentation|19
+Asian|Reckless Behavior|16
+Asian|Bus Misconduct|13
+Asian|Insubordination/Non-compliance with behavioral expectations|13
+Asian|Fighting, Less Serious|8
+Asian|Inappropriate Language|5
+Asian|Violation of other Defined School Rules|5
+Hispanic|Classroom Disruption/Behavior Disruptive to the School Environment|827
+Hispanic|Insubordination/Non-compliance with behavioral expectations|289
+Hispanic|Disrespectful to Adults/Others|261
+Hispanic|Reckless Behavior|176
+Hispanic|Assault, No Injury|127
+Hispanic|Fighting, Less Serious|82
+Hispanic|No Behavior Event/Documentation|79
+Hispanic|Bus Misconduct|62
+Hispanic|Inappropriate Language|53
+Hispanic|Assault to Staff|47
+Multi Racial|Classroom Disruption/Behavior Disruptive to the School Environment|792
+Multi Racial|Insubordination/Non-compliance with behavioral expectations|244
+Multi Racial|Disrespectful to Adults/Others|194
+Multi Racial|Reckless Behavior|122
+Multi Racial|Assault, No Injury|99
+Multi Racial|Fighting, Less Serious|68
+Multi Racial|Assault to Staff|63
+Multi Racial|No Behavior Event/Documentation|45
+Multi Racial|Violation of other Defined School Rules|39
+Multi Racial|Damage to School, Staff, or Student Property|37
+Native American|Classroom Disruption/Behavior Disruptive to the School Environment|57
+Native American|Insubordination/Non-compliance with behavioral expectations|21
+Native American|Disrespectful to Adults/Others|17
+Native American|Reckless Behavior|15
+Native American|Fighting, Less Serious|12
+Native American|Damage to School, Staff, or Student Property|3
+Native American|Engaging in Verbal Conflict|3
+Native American|Assault, No Injury|2
+Native American|Bullying|2
+Native American|No Behavior Event/Documentation|2
+Pacific Islander|Classroom Disruption/Behavior Disruptive to the School Environment|13
+Pacific Islander|Insubordination/Non-compliance with behavioral expectations|2
+Pacific Islander|Bullying|1
+White|Classroom Disruption/Behavior Disruptive to the School Environment|1767
+White|Disrespectful to Adults/Others|543
+White|Insubordination/Non-compliance with behavioral expectations|456
+White|Reckless Behavior|341
+White|Assault, No Injury|315
+White|No Behavior Event/Documentation|149
+White|Fighting, Less Serious|141
+White|Assault to Staff|110
+White|Repeated Violations|105
+White|Assault with Injury (Intentional)|84
+```
+
+
+
 
