@@ -28,7 +28,16 @@ INSERT INTO resolution_categories (category, resolutionName) VALUES
   ('out_of_class', 'Student Success Center'),
   ('out_of_class', 'Suspended Short-Term (1-5 Days)');
 
-SELECT rc.category, rc.resolutionName, count(*)
+INSERT INTO resolution_categories
+SELECT DISTINCT 'other', resolutionName
+FROM disc
+WHERE resolutionName NOT IN (
+  SELECT DISTINCT resolutionName
+  FROM resolution_categories
+);
+
+SELECT rc.resolutionName, rc.category, count(*)
 FROM resolution_categories rc
 LEFT OUTER JOIN disc ON (rc.resolutionName = disc.resolutionName)
-GROUP BY 1,2;
+GROUP BY 1,2
+ORDER BY 1;

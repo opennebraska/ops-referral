@@ -358,11 +358,12 @@ FROM disc
 WHERE Grade IN ('PK', 'KG', 1, 2, 3);
 19,933
 
-0.5%
+0.46%
 ```
 
 2) What % of all PK-3 grader referrals resulting in positive resolutions by race.
 
+```
 ./by_race2.pl --grades "'PK', 'KG', 1, 2, 3" --category positive
 African American|39|10652|0.37
 Asian|4|237|1.69
@@ -371,4 +372,21 @@ Multi Racial|9|1966|0.46
 Native American|1|146|0.68
 Pacific Islander|0|16|0.00
 White|31|4609|0.67
+```
+
+3) What % of all PK-3 grader referrals resulting in out-of-class or other resolutions.
+
+```
+./by_race2.pl --grades "'PK', 'KG', 1, 2, 3" --category out_of_class
+African American|917|10652|8.61
+Asian|8|237|3.38
+Hispanic|249|2307|10.79
+Multi Racial|168|1966|8.55
+Native American|8|146|5.48
+Pacific Islander|0|16|0.00
+White|439|4609|9.52
+```
+
+
+
 
