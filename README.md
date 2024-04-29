@@ -22,8 +22,8 @@ install, so let's use Docker:
     Dockerfile
     xlsx_to_sqlite.py
 
-    docker build . -t pandas-test
-    docker run -it pandas-test
+    docker build . -t pandas
+    docker run -it --name pandas --mount type=bind,source="$(pwd)",target=/home/data pandas
 
 Now we have a SQLite database containing sheet 1 of "OPS Referral Data 2018-2019.xlsx".
 
