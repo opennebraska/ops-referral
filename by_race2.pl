@@ -5,11 +5,19 @@ use DBI;
 use Getopt::Long;
 
 my $grades;
-GetOptions("grades=s" => \$grades)  # string
+my $category;
+GetOptions(
+  "grades=s"   => \$grades,    # string
+  "category=s" => \$category,  # string
+)
   or usage();
 
 if (not defined $grades) {
   say STDERR "FATAL: Argument 'grades' is mandatory.";
+  usage();
+}
+if (not defined $category) {
+  say STDERR "FATAL: Argument 'category' is mandatory.";
   usage();
 }
 
@@ -18,7 +26,7 @@ my $strsql1 = <<SQL;
   SELECT count(*)
   FROM disc
   JOIN resolution_categories rc ON (disc.resolutionName = rc.resolutionName)
-  WHERE rc.category = 'positive'
+  WHERE rc.category = '$category'
   AND Grade IN ($grades)
   AND RaceEthnicity = ?
 SQL
