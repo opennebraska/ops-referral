@@ -339,7 +339,7 @@ Positive Resolutions: Conflict Resolution, Consultation with/Referral to a Schoo
 
 Out-of-Class Resolutions: Dismissed from Program, Emergency Exclusion, Expelled-Calendar Year, Expelled –This Semester Only, Long-Term Suspension (6-19 days), PAC Admin Intervention, PAC Consultation, Removed from Class/Activity- Admin Intervention, Removed from Class/Activity-Consultation, Student Success Center, Suspended Short-Term (1-5 Days).
 
-One time database table load:
+One time database table load & bad data cleanup:
 
 ```
 sqlite3 ops.sqlite3 < resolution_categories.sql
