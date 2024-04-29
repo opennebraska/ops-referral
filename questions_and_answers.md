@@ -361,3 +361,15 @@ WHERE Grade IN ('PK', 'KG', 1, 2, 3);
 0.5%
 ```
 
+2) What % of all PK-3 grader referrals resulting in positive resolutions by race.
+
+./by_race2.pl --grades "'PK', 'KG', 1, 2, 3"
+African American|39|10652|0.37
+Asian|4|237|1.69
+Hispanic|7|2307|0.30
+Multi Racial|9|1966|0.46
+Native American|1|146|0.68
+Pacific Islander|0|16|0.00
+White|31|4609|0.67
+
+
