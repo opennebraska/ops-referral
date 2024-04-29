@@ -259,6 +259,78 @@ White|Assault with Injury (Intentional)|84
 
 4) Top 10 Reasons 4th through 6th grade students received referral by race.
 
-
+```
+./by_race.pl --grades "4,5,6"
+African American|Classroom Disruption/Behavior Disruptive to the School Environment|4764
+African American|Disrespectful to Adults/Others|2136
+African American|Insubordination/Non-compliance with behavioral expectations|2126
+African American|No Behavior Event/Documentation|1766
+African American|Excessive Tardies/Hall Sweep|935
+African American|Reckless Behavior|919
+African American|Fighting, Less Serious|741
+African American|Engaging in Verbal Conflict|429
+African American|Assault, No Injury|393
+African American|Misuse of Pass/Out of Area|368
+Asian|Classroom Disruption/Behavior Disruptive to the School Environment|67
+Asian|Insubordination/Non-compliance with behavioral expectations|44
+Asian|Excessive Tardies/Hall Sweep|36
+Asian|Disrespectful to Adults/Others|27
+Asian|Reckless Behavior|13
+Asian|Assault, No Injury|12
+Asian|Fighting, Less Serious|11
+Asian|Inappropriate Language|10
+Asian|No Behavior Event/Documentation|10
+Asian|Violation of other Defined School Rules|10
+Hispanic|Classroom Disruption/Behavior Disruptive to the School Environment|1041
+Hispanic|Disrespectful to Adults/Others|524
+Hispanic|Insubordination/Non-compliance with behavioral expectations|460
+Hispanic|No Behavior Event/Documentation|382
+Hispanic|Excessive Tardies/Hall Sweep|228
+Hispanic|Reckless Behavior|223
+Hispanic|Fighting, Less Serious|217
+Hispanic|Inappropriate Language|129
+Hispanic|Assault, No Injury|84
+Hispanic|Threats or Intimidation|77
+Multi Racial|Classroom Disruption/Behavior Disruptive to the School Environment|599
+Multi Racial|Insubordination/Non-compliance with behavioral expectations|304
+Multi Racial|Disrespectful to Adults/Others|268
+Multi Racial|No Behavior Event/Documentation|211
+Multi Racial|Excessive Tardies/Hall Sweep|151
+Multi Racial|Reckless Behavior|115
+Multi Racial|Fighting, Less Serious|111
+Multi Racial|Violation of other Defined School Rules|72
+Multi Racial|Misuse of Pass/Out of Area|67
+Multi Racial|Assault, No Injury|51
+Native American|Classroom Disruption/Behavior Disruptive to the School Environment|73
+Native American|Insubordination/Non-compliance with behavioral expectations|26
+Native American|No Behavior Event/Documentation|21
+Native American|Fighting, Less Serious|20
+Native American|Disrespectful to Adults/Others|14
+Native American|Excessive Tardies/Hall Sweep|9
+Native American|Violation of other Defined School Rules|8
+Native American|Misuse of Pass/Out of Area|7
+Native American|Damage to School, Staff, or Student Property|6
+Native American|Threats or Intimidation|5
+Pacific Islander|Classroom Disruption/Behavior Disruptive to the School Environment|23
+Pacific Islander|No Behavior Event/Documentation|16
+Pacific Islander|Disrespectful to Adults/Others|14
+Pacific Islander|Insubordination/Non-compliance with behavioral expectations|13
+Pacific Islander|Truancy|13
+Pacific Islander|Reckless Behavior|11
+Pacific Islander|Fighting, Serious|6
+Pacific Islander|Misuse of Pass/Out of Area|6
+Pacific Islander|Assault, No Injury|4
+Pacific Islander|Excessive Tardies/Hall Sweep|3
+White|Classroom Disruption/Behavior Disruptive to the School Environment|1033
+White|Insubordination/Non-compliance with behavioral expectations|570
+White|Disrespectful to Adults/Others|496
+White|No Behavior Event/Documentation|347
+White|Reckless Behavior|226
+White|Excessive Tardies/Hall Sweep|208
+White|Fighting, Less Serious|172
+White|Violation of other Defined School Rules|131
+White|Assault, No Injury|126
+White|Inappropriate Language|102
+```
 
 
