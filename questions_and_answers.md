@@ -341,7 +341,76 @@ Out-of-Class Resolutions: Dismissed from Program, Emergency Exclusion, Expelled-
 
 One time database table load:
 
-    sqlite3 ops.sqlite3 < resolution_categories.sql
+```
+sqlite3 ops.sqlite3 < resolution_categories.sql
+
+Applied to Other Action|other|9495
+Assigned to Saturday School|other|118
+Board Appeal Requested|other|1
+Board Decision-Hearing Decision Overturned-Reinstated|other|1
+Board Decision-Hearing Decision Upheld|other|1
+Changed Class/Schedule|other|233
+Conference with Student|other|15704
+Conference with Student and Teacher|other|1130
+Confiscation of Contraband|other|83
+Confiscation of Electronic Device|other|1380
+Conflict Resolution|positive|681
+Consultation with/Referral to Gang Interventionist|other|16
+Consultation with/Referral to School Psychologist|other|15
+Consultation with/Referral to a School Psychologist|positive|1
+Detention Assigned|other|15435
+Dismissed from Program|out_of_class|38
+Due Process 504 Conference|other|11
+Due Process IEP Conference|positive|259
+Emergency Exclusion|out_of_class|20
+Expelled-Calendar Year|out_of_class|7
+Expelled-This Semester Only|out_of_class|408
+Hearing Request Withdrawn|other|1
+Hearing-Long-Term Suspension|other|1
+Hearing-No Show|other|2
+Hearing-Reassignment to Another School|other|13
+Hearing-Recommendation Upheld|other|6
+Hearing-Reinstate to School|other|4
+Late School|other|1149
+Law Enforcement Contacted|other|11
+Long-Term Suspension (6-19 days)|out_of_class|340
+Loss of School Privileges|other|2158
+Mentoring|other|81
+No Action Taken|other|1966
+PAC - Admin Intervention|out_of_class|6041
+PAC - Consultation|out_of_class|12167
+Parent/Guardian Conference|positive|2124
+Parent/Guardian Contact Made|positive|8145
+Reassignment Recommendation Overturned (OSCFE Only)|other|12
+Reassignment Recommendation Upheld (OSCFE Only)|other|67
+Recommended Reassignment|other|91
+Refer to Social Worker|other|139
+Referral for 1st SAT|positive|1
+Referral for 2nd SAT|positive|1
+Referral to Community Agency|positive|80
+Referral to Community Counselor|positive|84
+Referral to School Counselor-Admin Intervention|positive|1
+Referral to School Counselor-Consultation and Refer to Social Worker|positive|1
+Referred for IEP Update|positive|178
+Referred for/1st SAT|other|156
+Referred for/2nd SAT|other|39
+Referred for/3rd SAT|other|4
+Referred to SSL|other|88
+Referred to School Counselor - Admin Intervention|other|436
+Referred to School Counselor - Consultation|other|293
+Removed from Class/Activity - Admin Intervention|out_of_class|6139
+Removed from Class/Activity - Consultation|out_of_class|5845
+Request for Hearing (Hearing Office Only)|other|3
+Restitution|other|132
+School/Community Service|other|71
+Secondary Transition Program|other|52
+Student Success Center|out_of_class|13242
+Substance Abuse Screening|other|21
+Suspended Short-Term (1-5 Days)|out_of_class|13332
+Suspended from Bus/Van|other|208
+Suspension from co-curricular activity|other|27
+Threat Assessment|other|111
+```
 
 1) What % of all PK-3 grader referrals resulting in positive resolutions.
 
