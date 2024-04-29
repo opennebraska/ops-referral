@@ -191,7 +191,7 @@ Inappropriate Language|591
 3) Top 10 Reasons Pre-K through 3rd grade students received referral by race.
 
 ```
-./by_race.pl
+./by_race.pl --grades "'PK', 'KG', 1, 2, 3"
 African American|Classroom Disruption/Behavior Disruptive to the School Environment|4140
 African American|Insubordination/Non-compliance with behavioral expectations|1200
 African American|Disrespectful to Adults/Others|1167
@@ -256,6 +256,8 @@ White|Assault to Staff|110
 White|Repeated Violations|105
 White|Assault with Injury (Intentional)|84
 ```
+
+4) Top 10 Reasons 4th through 6th grade students received referral by race.
 
 
 
