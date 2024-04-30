@@ -46,16 +46,18 @@ for column in columns:
   df2[column] = df2[column].astype('Int64')  # capital I
 print("After dropping columns:")
 print(df2.head())
-# Drop Total rows
+# Drop all rows with "Total" in the school name
 df2 = df2[~df2["school"].str.contains("Total", na=False)]
 print("After dropping Total rows:")
 print(df2.head())
 # They didn't re-state the school every time, which is convenient for humans, but terrible
 # for data processing. Luckily Pandas can fill the missing data back in for us:
-df2["school"] = df2["school"].fillna(method='pad')
+df2["school"] = df2["school"].ffill()
+
 print("After fillna():")
 print(df2.head())
 
+# Create a database table and write all the dataframe data into it
 df2.to_sql("membership", conn, if_exists="replace")
 
 conn.commit()
