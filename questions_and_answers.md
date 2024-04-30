@@ -33,10 +33,11 @@ White|4609
 ### 3) Total number of 4th through 6 students referred.
 
 ```
-SELECT count(*)
+SELECT count(DISTINCT w)
 FROM disc
 WHERE Grade IN (4, 5, 6);
-30,297
+
+3754
 ```
 
 ### 4) Total number of 4th through 6 students referred by race.
