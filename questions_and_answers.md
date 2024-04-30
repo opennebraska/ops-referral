@@ -2,9 +2,9 @@
 
 2018-19 School Year
 
-Overall Discipline Picture:
+## Overall Discipline Picture:
 
-1) Total number of referrals for Pre-K through 3.
+### 1) Total number of referrals for Pre-K through 3.
 
 ```
 sqlite3 ops.sqlite3
@@ -58,7 +58,7 @@ WHERE Grade IN ('PK', 'KG', 1, 2, 3);
 19,933
 ```
 
-2) Total number of referral for Pre-K through 3 by race.
+### 2) Total number of referral for Pre-K through 3 by race.
 
 ```
 SELECT RaceEthnicity, count(*)
@@ -75,7 +75,7 @@ Pacific Islander|16
 White|4609
 ```
 
-3) Total number of 4th through 6 students referred.
+### 3) Total number of 4th through 6 students referred.
 
 ```
 SELECT count(*)
@@ -84,7 +84,7 @@ WHERE Grade IN (4, 5, 6);
 30,297
 ```
 
-4) Total number of 4th through 6 students referred by race.
+### 4) Total number of 4th through 6 students referred by race.
 
 ```
 SELECT RaceEthnicity, count(*)
@@ -101,7 +101,7 @@ Pacific Islander|128
 White|4475
 ```
 
-5) Total number of repeat of referrals by race (2 or more, 5 or more, 10 or more, 20 or more, 30 or more). 
+### 5) Total number of repeat of referrals by race (2 or more, 5 or more, 10 or more, 20 or more, 30 or more). 
 
 ```
 ✗ perl cluster.pl | sort
@@ -142,9 +142,9 @@ White|4475
 30 or more|White|107
 ```
 
-Reasons for Referrals:
+## Reasons for Referrals:
 
-1) Top 10 Reasons Pre-K through 3rd grade students received referral.
+### 1) Top 10 Reasons Pre-K through 3rd grade students received referral.
 
 ```
 SELECT eventName, count(*)
@@ -166,7 +166,7 @@ No Behavior Event/Documentation|386
 Repeated Violations|355
 ```
 
-2) Top 10 Reasons 4th through 6th grade students received referral.
+### 2) Top 10 Reasons 4th through 6th grade students received referral.
 
 ```
 SELECT eventName, count(*)
@@ -188,7 +188,7 @@ Misuse of Pass/Out of Area|591
 Inappropriate Language|591
 ```
 
-3) Top 10 Reasons Pre-K through 3rd grade students received referral by race.
+### 3) Top 10 Reasons Pre-K through 3rd grade students received referral by race.
 
 ```
 ./by_race.pl --grades "'PK', 'KG', 1, 2, 3"
@@ -257,7 +257,7 @@ White|Repeated Violations|105
 White|Assault with Injury (Intentional)|84
 ```
 
-4) Top 10 Reasons 4th through 6th grade students received referral by race.
+### 4) Top 10 Reasons 4th through 6th grade students received referral by race.
 
 ```
 ./by_race.pl --grades "4,5,6"
@@ -333,7 +333,7 @@ White|Assault, No Injury|126
 White|Inappropriate Language|102
 ```
 
-Resolutions:  
+## Resolutions:  
 
 **Positive Resolutions:** Conflict Resolution, Consultation with/Referral to a School Psychologist, Referral to Community Agency, Referral to Community Counselor,  Parent Guardian Conference, Parent Guardian Contact Made, Referred for IEP Update, Referral for 1st SAT, Referral for 2nd SAT, Due Process IEP Conference, Referral to School Counselor-Admin Intervention, Referral to School Counselor-Consultation and Refer to Social Worker.
 
@@ -411,7 +411,7 @@ Suspension from co-curricular activity|other|27
 Threat Assessment|other|111
 ```
 
-1) What % of all PK-3 grader referrals resulting in positive resolutions.
+### 1) What % of all PK-3 grader referrals resulting in positive resolutions.
 
 ```
 SELECT count(*)
@@ -429,7 +429,7 @@ WHERE Grade IN ('PK', 'KG', 1, 2, 3);
 12.88%
 ```
 
-2) What % of all PK-3 grader referrals resulting in positive resolutions by race.
+### 2) What % of all PK-3 grader referrals resulting in positive resolutions by race.
 
 ```
 ./by_race2.pl --grades "'PK', 'KG', 1, 2, 3" --category positive
@@ -442,7 +442,7 @@ Pacific Islander|2|16|12.50
 White|581|4609|12.61
 ```
 
-3) What % of all PK-3 grader referrals resulting in out-of-class or other resolutions.
+### 3) What % of all PK-3 grader referrals resulting in out-of-class or other resolutions.
 
 ```
 SELECT category, count(*)
@@ -460,7 +460,7 @@ out_of_class: 0.00%
 other: 96.84%
 ```
 
-4) What % of all PK-3 grader referrals resulting in out-of-class or other resolutions by race.
+### 4) What % of all PK-3 grader referrals resulting in out-of-class or other resolutions by race.
 
 ```
 ./by_race2.pl --grades "'PK', 'KG', 1, 2, 3" --category out_of_class
@@ -496,7 +496,7 @@ Oh... ya, sometimes in our original .xlsx data `resolutionName` is NULL. So that
 why sometimes resolutions aren't `postitive` nor `out_of_class` nor `other`. So apparently
 this is a feature, not a bug, given our original data source.
 
-5) Number of all PK-3 grader referrals resulting in each of these: a. referrals to counselors, b. referrals to social workers and c. referral/consult with school psychologist.
+### 5) Number of all PK-3 grader referrals resulting in each of these: a. referrals to counselors, b. referrals to social workers and c. referral/consult with school psychologist.
 
 ```
 SELECT resolutionName, count(*)
