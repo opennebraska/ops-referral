@@ -40,7 +40,8 @@ df2 = df2.drop([4], axis=1)
 columns = ['AA-F', 'AA-M', 'A-F', 'A-M', 'H-F', 'H-M', 'MR-F', 'MR-M', 'NA-F', 'NA-M', 'PA-F', 'PA-M', 'W-F', 'W-M']
 df2.columns = ['school', 'grade', *columns]
 # Change to Pandas int to keep NaNs. NOT Numpy int, which fails on NaN
-# df2['AA-F':'W-M'] = df2['AA-F':'W-M'].astype('Int64')  # capital I
+# We can't do dataframe ranges for this (explodes)?
+#   df2['AA-F':'W-M'] = df2['AA-F':'W-M'].astype('Int64')  # capital I
 for column in columns:
   df2[column] = df2[column].astype('Int64')  # capital I
 print("After dropping columns:")
