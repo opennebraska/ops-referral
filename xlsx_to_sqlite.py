@@ -33,7 +33,7 @@ df2 = df2.drop([10], axis=1)
 df2 = df2.drop([7], axis=1)
 df2 = df2.drop([4], axis=1)
 # Provide new column names because we just deleted all the human-friendly ones
-columns = ['AA-F', 'AA-M', 'A-F', 'A-M', 'H-F', 'H-M', 'MR-F', 'MR-M', 'NA-F', 'NA-M', 'PA-F', 'PA-M', 'W-F', 'W-M']
+columns = ['AA-F', 'AA-M', 'A-F', 'A-M', 'H-F', 'H-M', 'MR-F', 'MR-M', 'NA-F', 'NA-M', 'PI-F', 'PI-M', 'W-F', 'W-M']
 df2.columns = ['school', 'grade', *columns]
 # Change to Pandas int to keep NaNs. NOT Numpy int, which fails on NaN
 # We can't do dataframe ranges for this (explodes)?

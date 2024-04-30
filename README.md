@@ -92,8 +92,8 @@ CREATE TABLE IF NOT EXISTS "membership_raw" (
   "MR-M" INTEGER,
   "NA-F" INTEGER,
   "NA-M" INTEGER,
-  "PA-F" INTEGER,
-  "PA-M" INTEGER,
+  "PI-F" INTEGER,
+  "PI-M" INTEGER,
   "W-F" INTEGER,
   "W-M" INTEGER
 );
@@ -102,6 +102,17 @@ CREATE INDEX "ix_membership_raw_index"ON "membership_raw" ("index");
 sqlite> select count(*) from membership_raw;
 678
 
+./membership.pl
 
+sqlite> select count(*) from membership;
+5187
 
+sqlite> SELECT RaceEthnicity, sum(students) FROM membership GROUP BY 1;
+African American|13124
+Asian|3421
+Hispanic|19213
+Multi Racial|2868
+Native American|444
+Pacific Islander|79
+White|14031
 ```
