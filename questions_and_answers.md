@@ -719,3 +719,31 @@ Yes, we see there are 4 unique students.
 
 ### 5) What % of PK through 3rd grade students received suspensions by race? (Pie Chart)
 
+```
+WITH student_referred AS (
+  SELECT raceEthnicity, count(DISTINCT w) referral_count
+  FROM disc
+  WHERE grade IN ('PK', 'KG', 1, 2, 3)
+  AND resolutionName like '%suspen%'
+  COLLATE NOCASE
+  GROUP BY raceEthnicity
+),
+all_students AS (
+  SELECT raceEthnicity, sum(students) sum_students
+  FROM membership
+  WHERE grade IN ('PK', 'KG', 1, 2, 3)
+  GROUP BY 1
+)
+SELECT
+  student_referred.raceEthnicity, student_referred.referral_count, all_students.sum_students,
+  ROUND(student_referred.referral_count * 1.0 / all_students.sum_students * 100, 2)
+FROM student_referred
+JOIN all_students ON (student_referred.raceEthnicity = all_students.raceEthnicity);
+
+African American|368|4089|9.0
+Asian|5|1348|0.37
+Hispanic|97|6186|1.57
+Multi Racial|70|1142|6.13
+Native American|4|133|3.01
+White|153|4876|3.14
+```
