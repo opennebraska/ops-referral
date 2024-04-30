@@ -578,4 +578,33 @@ Parent/Guardian Contact Made|Native American|27
 Parent/Guardian Contact Made|White|451
 ```
 
+### 3) Number of all PK-3 grader referrals resulting in parent conferences.
 
+See #1 above.
+
+### 4) Number of all PK-3 grader referrals resulting in parent conference by race.
+
+See #2 above.
+
+## Suspensions
+
+1) What % of referrals resulting in short-term and long-term suspensions.
+
+```
+SELECT count(*) FROM disc;
+
+122758
+
+SELECT resolutionName, count(*),
+  round(count(*) * 1.0 / 122758 * 100, 2)  -- * 1.0 forces int -> float
+FROM disc
+WHERE resolutionName like '%suspen%'
+COLLATE NOCASE
+GROUP BY 1;
+
+Hearing-Long-Term Suspension|1|0.0
+Long-Term Suspension (6-19 days)|340|0.28
+Suspended Short-Term (1-5 Days)|13332|10.86
+Suspended from Bus/Van|208|0.17
+Suspension from co-curricular activity|27|0.02
+```
