@@ -646,5 +646,12 @@ Yup, found 2 students at 8+: One at 8 suspensions, one at 9.
 
 ### 1) Total number of PK through 3rd graders.
 
-OK, so now we need an entirely different dataset: SchoolLevel_RaceGenderGradeMembership_1718to1920.xlsx
+```
+SELECT sum(students)
+FROM membership
+WHERE grade IN ('PK', 'KG', 1, 2, 3);
+
+17,801
+```
+
 

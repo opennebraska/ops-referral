@@ -101,7 +101,11 @@ CREATE INDEX "ix_membership_raw_index"ON "membership_raw" ("index");
 
 sqlite> select count(*) from membership_raw;
 678
+```
 
+Read from `membership_raw` and write to `membership`. (De-crosstab the data.)
+
+```
 ./membership.pl
 
 sqlite> select count(*) from membership;
