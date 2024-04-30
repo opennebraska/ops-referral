@@ -465,6 +465,17 @@ Pacific Islander|2|16|12.50
 White|899|4609|19.51
 ```
 
+Data check: Show all Pacific Islander:
 
+```
+SELECT disc.resolutionName, category
+FROM disc
+LEFT OUTER JOIN resolution_categories rc ON (disc.resolutionName = rc.resolutionName)
+WHERE Grade IN ('PK', 'KG', 1, 2, 3)
+AND RaceEthnicity = 'Pacific Islander';
+```
 
+Oh... ya, sometimes in our original .xlsx data `resolutionName` is NULL. So that explains
+why sometimes resolutions aren't `postitive` nor `out_of_class` nor `other`. So apparently
+this is a feature, not a bug, given our original data source.
 
