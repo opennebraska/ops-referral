@@ -517,3 +517,23 @@ Referral to Community Agency|3
 Referral to Community Counselor|1
 ```
 
+### 6) Number of all PK-3 grader referrals resulting in each of these: a. referrals to counselors, b. referrals to social workers and c. referral/consult with school psychologist by race.
+
+```
+SELECT resolutionName, raceEthnicity, count(*)
+FROM disc
+WHERE Grade IN ('PK', 'KG', 1, 2, 3)
+AND resolutionName like '%referral%'
+COLLATE NOCASE
+GROUP BY 1, 2;
+
+Consultation with/Referral to School Psychologist|African American|3
+Consultation with/Referral to School Psychologist|Hispanic|1
+Consultation with/Referral to School Psychologist|Native American|1
+Consultation with/Referral to School Psychologist|White|2
+Referral to Community Agency|African American|1
+Referral to Community Agency|Multi Racial|1
+Referral to Community Agency|White|1
+Referral to Community Counselor|African American|1
+```
+
