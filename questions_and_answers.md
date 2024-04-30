@@ -537,3 +537,45 @@ Referral to Community Agency|White|1
 Referral to Community Counselor|African American|1
 ```
 
+## Parent Engagement:
+
+### 1) Number of all PK-3 grader referrals resulting in parent contacts.
+
+```
+SELECT resolutionName, count(*)
+FROM disc
+WHERE Grade IN ('PK', 'KG', 1, 2, 3)
+AND resolutionName like '%parent%'
+COLLATE NOCASE
+GROUP BY 1;
+
+Parent/Guardian Conference|407
+Parent/Guardian Contact Made|2063
+```
+
+### 2) Number of all PK-3 grader referrals resulting in parent contacts by race.
+
+```
+SELECT resolutionName, raceEthnicity, count(*)
+FROM disc
+WHERE Grade IN ('PK', 'KG', 1, 2, 3)
+AND resolutionName like '%parent%'
+COLLATE NOCASE
+GROUP BY 1, 2;
+
+Parent/Guardian Conference|African American|218
+Parent/Guardian Conference|Asian|3
+Parent/Guardian Conference|Hispanic|52
+Parent/Guardian Conference|Multi Racial|31
+Parent/Guardian Conference|Native American|4
+Parent/Guardian Conference|Pacific Islander|2
+Parent/Guardian Conference|White|97
+Parent/Guardian Contact Made|African American|1079
+Parent/Guardian Contact Made|Asian|24
+Parent/Guardian Contact Made|Hispanic|290
+Parent/Guardian Contact Made|Multi Racial|192
+Parent/Guardian Contact Made|Native American|27
+Parent/Guardian Contact Made|White|451
+```
+
+
