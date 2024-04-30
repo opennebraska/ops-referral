@@ -678,7 +678,7 @@ I'm not sure what "disaggregated" means.
 ### 4) What % of PK through 3rd grade students received discipline referrals by race? (Pie Chart)
 
 ```
-WITH student_referred AS (
+WITH students_referred AS (
   SELECT raceEthnicity, count(DISTINCT w) referral_count
   FROM disc
   WHERE grade IN ('PK', 'KG', 1, 2, 3)
@@ -691,10 +691,10 @@ all_students AS (
   GROUP BY 1
 )
 SELECT
-  student_referred.raceEthnicity, student_referred.referral_count, all_students.sum_students,
-  ROUND(student_referred.referral_count * 1.0 / all_students.sum_students * 100, 2)
-FROM student_referred
-JOIN all_students ON (student_referred.raceEthnicity = all_students.raceEthnicity);
+  students_referred.raceEthnicity, students_referred.referral_count, all_students.sum_students,
+  ROUND(students_referred.referral_count * 1.0 / all_students.sum_students * 100, 2)
+FROM students_referred
+JOIN all_students ON (students_referred.raceEthnicity = all_students.raceEthnicity);
 
 African American|1350|4089|33.02
 Asian|103|1348|7.64
@@ -720,7 +720,7 @@ Yes, we see there are 4 unique students.
 ### 5) What % of PK through 3rd grade students received suspensions by race? (Pie Chart)
 
 ```
-WITH student_referred AS (
+WITH students_referred AS (
   SELECT raceEthnicity, count(DISTINCT w) referral_count
   FROM disc
   WHERE grade IN ('PK', 'KG', 1, 2, 3)
@@ -735,10 +735,10 @@ all_students AS (
   GROUP BY 1
 )
 SELECT
-  student_referred.raceEthnicity, student_referred.referral_count, all_students.sum_students,
-  ROUND(student_referred.referral_count * 1.0 / all_students.sum_students * 100, 2)
-FROM student_referred
-JOIN all_students ON (student_referred.raceEthnicity = all_students.raceEthnicity);
+  students_referred.raceEthnicity, students_referred.referral_count, all_students.sum_students,
+  ROUND(students_referred.referral_count * 1.0 / all_students.sum_students * 100, 2)
+FROM students_referred
+JOIN all_students ON (students_referred.raceEthnicity = all_students.raceEthnicity);
 
 African American|368|4089|9.0
 Asian|5|1348|0.37
