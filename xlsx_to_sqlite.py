@@ -24,14 +24,11 @@ df2 = pd.read_excel(
   sheet_name=1,
   usecols="A:W",
   header=None,
-  skiprows=3,
-  skipfooter=1,
+  skiprows=3,    # Drop the 3 header rows, the human-friendly formatting is confusing
+  skipfooter=1,  # Also drop grand total row at the bottom
 )
-# Drop the 3 header rows, the human-friendly formatting is confusing
-# Also drop grand total row and columns (the last row and the last column)
-# df2 = df2.iloc[3:-1, :-1]
-# Drop Total columns
 print(df2.head())
+# Drop Total columns
 df2 = df2.drop([22], axis=1)
 df2 = df2.drop([19], axis=1)
 df2 = df2.drop([16], axis=1)
@@ -39,8 +36,13 @@ df2 = df2.drop([13], axis=1)
 df2 = df2.drop([10], axis=1)
 df2 = df2.drop([7], axis=1)
 df2 = df2.drop([4], axis=1)
-# Provice new column names because we just deleted all the human-friendly ones
-df2.columns = ['school', 'grade', 'AA-F', 'AA-M', 'A-F', 'A-M', 'H-F', 'H-M', 'MR-F', 'MR-M', 'NA-F', 'NA-M', 'PA-F', 'PA-M', 'W-F', 'W-M']
+# Provide new column names because we just deleted all the human-friendly ones
+columns = ['AA-F', 'AA-M', 'A-F', 'A-M', 'H-F', 'H-M', 'MR-F', 'MR-M', 'NA-F', 'NA-M', 'PA-F', 'PA-M', 'W-F', 'W-M']
+df2.columns = ['school', 'grade', *columns]
+# Change to Pandas int to keep NaNs. NOT Numpy int, which fails on NaN
+# df2['AA-F':'W-M'] = df2['AA-F':'W-M'].astype('Int64')  # capital I
+for column in columns:
+  df2[column] = df2[column].astype('Int64')  # capital I
 print("After dropping columns:")
 print(df2.head())
 # Drop Total rows
@@ -52,7 +54,6 @@ print(df2.head())
 df2["school"] = df2["school"].fillna(method='pad')
 print("After fillna():")
 print(df2.head())
-
 
 df2.to_sql("membership", conn, if_exists="replace")
 
