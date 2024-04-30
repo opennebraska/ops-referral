@@ -654,4 +654,21 @@ WHERE grade IN ('PK', 'KG', 1, 2, 3);
 17,801
 ```
 
+### 2) Total number of PK through 3rd grade students by race. 
+
+```
+SELECT raceEthnicity, sum(students)
+FROM membership
+WHERE grade IN ('PK', 'KG', 1, 2, 3)
+GROUP BY 1;
+
+African American|4089
+Asian|1348
+Hispanic|6186
+Multi Racial|1142
+Native American|133
+Pacific Islander|27
+White|4876
+```
+
 
