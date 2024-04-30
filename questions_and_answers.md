@@ -588,7 +588,7 @@ See #2 above.
 
 ## Suspensions
 
-1) What % of referrals resulting in short-term and long-term suspensions.
+### 1) What % of referrals resulting in short-term and long-term suspensions.
 
 ```
 SELECT count(*) FROM disc;
@@ -607,4 +607,12 @@ Long-Term Suspension (6-19 days)|340|0.28
 Suspended Short-Term (1-5 Days)|13332|10.86
 Suspended from Bus/Van|208|0.17
 Suspension from co-curricular activity|27|0.02
+```
+
+### 2) What % of referrals resulting in short-term and long-term suspensions by race.
+
+In progress...
+
+```
+./by_race3.pl
 ```
