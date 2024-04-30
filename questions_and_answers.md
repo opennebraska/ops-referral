@@ -42,18 +42,18 @@ WHERE Grade IN (4, 5, 6);
 ### 4) Total number of 4th through 6 students referred by race.
 
 ```
-SELECT RaceEthnicity, count(*)
+SELECT RaceEthnicity, count(DISTINCT w)
 FROM disc
 WHERE Grade IN (4, 5, 6)
 GROUP BY 1;
 
-African American|18451
-Asian|306
-Hispanic|4291
-Multi Racial|2406
-Native American|240
-Pacific Islander|128
-White|4475
+African American|1687
+Asian|93
+Hispanic|873
+Multi Racial|277
+Native American|30
+Pacific Islander|7
+White|787
 ```
 
 ### 5) Total number of repeat of referrals by race (2 or more, 5 or more, 10 or more, 20 or more, 30 or more). 
