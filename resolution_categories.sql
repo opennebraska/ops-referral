@@ -27,6 +27,10 @@ UPDATE disc
 SET   resolutionName = 'Removed from Class/Activity - Consultation'   -- 5845
 WHERE resolutionName = 'Removed from Class/Activity-Consultation';   -- 1
 
+UPDATE disc
+SET   resolutionName = 'Consultation with/Referral to School Psychologist'      -- 15
+WHERE resolutionName = 'Consultation with/Referral to a School Psychologist';   -- 1
+
 
 -- End of data cleanup
 
@@ -37,7 +41,7 @@ CREATE TABLE resolution_categories (
 );
 INSERT INTO resolution_categories (category, resolutionName) VALUES
   ('positive', 'Conflict Resolution'),
-  ('positive', 'Consultation with/Referral to a School Psychologist'),
+  ('positive', 'Consultation with/Referral to School Psychologist'),
   ('positive', 'Referral to Community Agency'),
   ('positive', 'Referral to Community Counselor'),
   ('positive', 'Parent/Guardian Conference'),

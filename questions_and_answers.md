@@ -356,8 +356,7 @@ Confiscation of Contraband|other|83
 Confiscation of Electronic Device|other|1380
 Conflict Resolution|positive|681
 Consultation with/Referral to Gang Interventionist|other|16
-Consultation with/Referral to School Psychologist|other|15
-Consultation with/Referral to a School Psychologist|positive|1
+Consultation with/Referral to School Psychologist|positive|15
 Detention Assigned|other|15435
 Dismissed from Program|out_of_class|38
 Due Process 504 Conference|other|11
