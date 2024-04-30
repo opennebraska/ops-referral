@@ -671,4 +671,51 @@ Pacific Islander|27
 White|4876
 ```
 
+### 3) PK through 3rd graders disaggregated by race. (Pie Chart)
+
+I'm not sure what "disaggregated" means.
+
+### 4) What % of PK through 3rd grade students received discipline referrals by race? (Pie Chart)
+
+```
+WITH student_referred AS (
+  SELECT raceEthnicity, count(DISTINCT w) referral_count
+  FROM disc
+  WHERE grade IN ('PK', 'KG', 1, 2, 3)
+  GROUP BY raceEthnicity
+),
+all_students AS (
+  SELECT raceEthnicity, sum(students) sum_students
+  FROM membership
+  WHERE grade IN ('PK', 'KG', 1, 2, 3)
+  GROUP BY 1
+)
+SELECT
+  student_referred.raceEthnicity, student_referred.referral_count, all_students.sum_students,
+  ROUND(student_referred.referral_count * 1.0 / all_students.sum_students * 100, 2)
+FROM student_referred
+JOIN all_students ON (student_referred.raceEthnicity = all_students.raceEthnicity);
+
+African American|1350|4089|33.02
+Asian|103|1348|7.64
+Hispanic|551|6186|8.91
+Multi Racial|291|1142|25.48
+Native American|23|133|17.29
+Pacific Islander|4|27|14.81
+White|768|4876|15.75
+```
+
+Sanity check that top CTE:
+
+```
+SELECT w
+FROM disc
+WHERE grade IN ('PK', 'KG', 1, 2, 3)
+AND raceEthnicity = 'Pacific Islander'
+ORDER BY 1;
+```
+
+Yes, we see there are 4 unique students.
+
+### 5) What % of PK through 3rd grade students received suspensions by race? (Pie Chart)
 
