@@ -448,16 +448,22 @@ White|581|4609|12.61
 SELECT category, count(*)
 FROM disc
 JOIN resolution_categories rc ON (disc.resolutionName = rc.resolutionName)
-WHERE Grade IN ('PK', 'KG', 1, 2, 3);
-other|19304
+WHERE Grade IN ('PK', 'KG', 1, 2, 3)
+GROUP BY 1;
+
+other|3385
+out_of_class|13351
+positive|2568
 
 SELECT count(*)
 FROM disc
 WHERE Grade IN ('PK', 'KG', 1, 2, 3);
+
 19933
 
-out_of_class: 0.00%
-other: 96.84%
+other:        16.98%
+out_of_class: 66.98%
+positive:     12.88%
 ```
 
 ### 4) What % of all PK-3 grader referrals resulting in out-of-class or other resolutions by race.
