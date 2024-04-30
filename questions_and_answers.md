@@ -496,3 +496,18 @@ Oh... ya, sometimes in our original .xlsx data `resolutionName` is NULL. So that
 why sometimes resolutions aren't `postitive` nor `out_of_class` nor `other`. So apparently
 this is a feature, not a bug, given our original data source.
 
+5) Number of all PK-3 grader referrals resulting in each of these: a. referrals to counselors, b. referrals to social workers and c. referral/consult with school psychologist.
+
+```
+SELECT resolutionName, count(*)
+FROM disc
+WHERE Grade IN ('PK', 'KG', 1, 2, 3)
+AND resolutionName like '%referral%'
+COLLATE NOCASE
+GROUP BY 1;
+
+Consultation with/Referral to School Psychologist|7
+Referral to Community Agency|3
+Referral to Community Counselor|1
+```
+
