@@ -27,6 +27,10 @@ install, so let's use Docker:
 
 Now we have a SQLite database containing sheet 1 of "OPS Referral Data 2018-2019.xlsx".
 
+It also contains sheet 1 of "SchoolLevel_RaceGenderGradeMembership_1718to1920.xlsx", because
+at the end of the list of questions posed we need enrollment statistics. For that dataset, we've
+had Pandas strip a bunch of human-friendly labelling out of the data before export to SQLite.
+
 ```
 sqlite3 ops.sqlite3
 
@@ -72,4 +76,32 @@ sqlite> select grade, count(*) from disc group by 1 order by 1;
 HS|56     # ?
 KG|3540   # Kindergarten
 PK|125    # Pre-K
+
+sqlite> .schema membership_raw
+CREATE TABLE IF NOT EXISTS "membership_raw" (
+"index" INTEGER,
+  "school" TEXT,
+  "grade" TEXT,
+  "AA-F" INTEGER,
+  "AA-M" INTEGER,
+  "A-F" INTEGER,
+  "A-M" INTEGER,
+  "H-F" INTEGER,
+  "H-M" INTEGER,
+  "MR-F" INTEGER,
+  "MR-M" INTEGER,
+  "NA-F" INTEGER,
+  "NA-M" INTEGER,
+  "PA-F" INTEGER,
+  "PA-M" INTEGER,
+  "W-F" INTEGER,
+  "W-M" INTEGER
+);
+CREATE INDEX "ix_membership_raw_index"ON "membership_raw" ("index");
+
+sqlite> select count(*) from membership_raw;
+678
+
+
+
 ```
