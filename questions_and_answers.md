@@ -335,9 +335,9 @@ White|Inappropriate Language|102
 
 Resolutions:  
 
-Positive Resolutions: Conflict Resolution, Consultation with/Referral to a School Psychologist, Referral to Community Agency, Referral to Community Counselor,  Parent Guardian Conference, Parent Guardian Contact Made, Referred for IEP Update, Referral for 1st SAT, Referral for 2nd SAT, Due Process IEP Conference, Referral to School Counselor-Admin Intervention, Referral to School Counselor-Consultation and Refer to Social Worker.
+**Positive Resolutions:** Conflict Resolution, Consultation with/Referral to a School Psychologist, Referral to Community Agency, Referral to Community Counselor,  Parent Guardian Conference, Parent Guardian Contact Made, Referred for IEP Update, Referral for 1st SAT, Referral for 2nd SAT, Due Process IEP Conference, Referral to School Counselor-Admin Intervention, Referral to School Counselor-Consultation and Refer to Social Worker.
 
-Out-of-Class Resolutions: Dismissed from Program, Emergency Exclusion, Expelled-Calendar Year, Expelled –This Semester Only, Long-Term Suspension (6-19 days), PAC Admin Intervention, PAC Consultation, Removed from Class/Activity- Admin Intervention, Removed from Class/Activity-Consultation, Student Success Center, Suspended Short-Term (1-5 Days).
+**Out-of-Class Resolutions:** Dismissed from Program, Emergency Exclusion, Expelled-Calendar Year, Expelled –This Semester Only, Long-Term Suspension (6-19 days), PAC Admin Intervention, PAC Consultation, Removed from Class/Activity- Admin Intervention, Removed from Class/Activity-Consultation, Student Success Center, Suspended Short-Term (1-5 Days).
 
 One time database table load & bad data cleanup:
 
