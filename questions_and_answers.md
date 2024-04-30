@@ -445,6 +445,24 @@ White|581|4609|12.61
 3) What % of all PK-3 grader referrals resulting in out-of-class or other resolutions.
 
 ```
+SELECT category, count(*)
+FROM disc
+JOIN resolution_categories rc ON (disc.resolutionName = rc.resolutionName)
+WHERE Grade IN ('PK', 'KG', 1, 2, 3);
+other|19304
+
+SELECT count(*)
+FROM disc
+WHERE Grade IN ('PK', 'KG', 1, 2, 3);
+19933
+
+out_of_class: 0.00%
+other: 96.84%
+```
+
+4) What % of all PK-3 grader referrals resulting in out-of-class or other resolutions by race.
+
+```
 ./by_race2.pl --grades "'PK', 'KG', 1, 2, 3" --category out_of_class
 African American|7211|10652|67.70
 Asian|159|237|67.09
@@ -454,7 +472,7 @@ Native American|71|146|48.63
 Pacific Islander|11|16|68.75
 White|3013|4609|65.37
 
-✗ ./by_race2.pl --grades "'PK', 'KG', 1, 2, 3" --category other
+./by_race2.pl --grades "'PK', 'KG', 1, 2, 3" --category other
 African American|1696|10652|15.92
 Asian|34|237|14.35
 Hispanic|383|2307|16.60
@@ -464,7 +482,7 @@ Pacific Islander|2|16|12.50
 White|897|4609|19.46
 ```
 
-Data check: Show all Pacific Islander:
+Sanity check: Show all Pacific Islanders:
 
 ```
 SELECT disc.resolutionName, category
