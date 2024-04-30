@@ -611,8 +611,24 @@ Suspension from co-curricular activity|27|0.02
 
 ### 2) What % of referrals resulting in short-term and long-term suspensions by race.
 
-In progress...
-
 ```
-./by_race3.pl
+WITH suspensions_by_race AS (
+  SELECT RaceEthnicity, count(*) cnt_sus
+  FROM disc
+  WHERE resolutionName like '%suspen%'
+  COLLATE NOCASE
+  GROUP BY 1
+)
+SELECT disc.RaceEthnicity, cnt_sus, count(*), round(cnt_sus * 1.0 / count(*) * 100, 2) 
+FROM disc
+JOIN suspensions_by_race ON (disc.RaceEthnicity = suspensions_by_race.RaceEthnicity)
+GROUP BY 1;
+
+African American|7437|66990|11.1
+Asian|164|1369|11.98
+Hispanic|3007|24687|12.18
+Multi Racial|898|8680|10.35
+Native American|143|1311|10.91
+Pacific Islander|18|196|9.18
+White|2241|19525|11.48
 ```
