@@ -632,3 +632,43 @@ Native American|143|1311|10.91
 Pacific Islander|18|196|9.18
 White|2241|19525|11.48
 ```
+
+### 3) Total number of repeat of suspensions by race (1+ times, 2 + times, 3 + times, 5 + times, 8 + times by race).  (See attached example of graph chart would like with this data.)
+
+```
+./cluster2.pl | sort
+1+ times|African American|2776
+1+ times|Asian|94
+1+ times|Hispanic|1385
+1+ times|Multi Racial|393
+1+ times|Native American|73
+1+ times|Pacific Islander|7
+1+ times|White|964
+2+ times|African American|1458
+2+ times|Asian|32
+2+ times|Hispanic|573
+2+ times|Multi Racial|195
+2+ times|Native American|32
+2+ times|Pacific Islander|5
+2+ times|White|438
+3+ times|African American|940
+3+ times|Asian|15
+3+ times|Hispanic|320
+3+ times|Multi Racial|109
+3+ times|Native American|18
+3+ times|Pacific Islander|3
+3+ times|White|253
+5+ times|African American|452
+5+ times|Asian|5
+5+ times|Hispanic|143
+5+ times|Multi Racial|39
+5+ times|Native American|4
+5+ times|Pacific Islander|1
+5+ times|White|117
+8+ times|African American|180
+8+ times|Asian|1
+8+ times|Hispanic|52
+8+ times|Multi Racial|15
+8+ times|Native American|2
+8+ times|White|37
+```
