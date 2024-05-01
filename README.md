@@ -19,11 +19,8 @@ datetime fields, regardless of how we format them in Numbers.app. So we're going
 Pandas to export .xlsx into SQLite. Locally we have a bunch of Pythons, and Pandas won't
 install, so let's use Docker:
 
-    Dockerfile
-    xlsx_to_sqlite.py
-
-    docker build . -t pandas
-    docker run -it --mount type=bind,source="$(pwd)",target=/home/data pandas
+    docker build . --file Dockerfile-xlsx --tag pandas-xlsx
+    docker run -it --mount type=bind,source="$(pwd)",target=/home/data pandas-xlsx
 
 Now we have a SQLite database containing sheet 1 of "OPS Referral Data 2018-2019.xlsx".
 
@@ -103,7 +100,7 @@ sqlite> select count(*) from membership_raw;
 678
 ```
 
-Read from `membership_raw` and write to `membership`. (De-crosstab the data.)
+## Step 2: Cleanse bad xlsx data, create membership table
 
 ```
 ./membership.pl
@@ -120,3 +117,10 @@ Native American|444
 Pacific Islander|79
 White|14031
 ```
+
+## Step 3: Generate website
+
+    docker build . --file Dockerfile-html --tag pandas-html
+    docker run -it --mount type=bind,source="$(pwd)",target=/home/data pandas-html
+
+
