@@ -51,6 +51,7 @@ print(df3.head())
 df3 = df3.pivot_table(index='referral_count', columns='RaceEthnicity', values='students')
 print(df3.head())
 sns_plot = sns.lineplot(data=df3)  # , x="students", y="referral_count")
+sns_plot.set_yscale("log")
 plt.savefig('d3.png', bbox_inches='tight')
 plt.clf()
 
