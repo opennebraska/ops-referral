@@ -89,7 +89,7 @@ plt.clf()
 
 
 
-with document(title='Omaha Public Schools Referral (Disciplinary) Data Analysis') as doc:
+with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019') as doc:
   h1('Omaha Public Schools 2018-2019')
   raw('Referral (disciplinary) data analysis. <a href="https://github.com/opennebraska/ops-referral">[Source code]</a>')
   h2('Students')
