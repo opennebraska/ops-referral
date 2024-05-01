@@ -21,6 +21,10 @@ sqlstr = """
 """
 df = pd.read_sql_query(sqlstr, con)
 
+# Discard 0th column which is just row numbers.
+# Ooops, nope we need to change to_html() below apparently
+# df = df.drop(df.columns[[0]], axis=1)
+
 sns_plot = sns.pairplot(df)  # , hue='species', height=2.5)
 plt.savefig('d1.png')
 
@@ -31,7 +35,7 @@ plt.savefig('d1.png')
 with document(title='Omaha Public Schools Referral (Disciplinary) Data Analysis') as doc:
   h1('Omaha Public Schools Referral (Disciplinary) Data Analysis')
   h2('2018-2019 School Year')
-  raw(df.to_html())
+  raw(df.to_html(index=False))
   raw('<img src="d1.png">')
   # for path in photos:
   #   div(img(src=path), _class='photo')
