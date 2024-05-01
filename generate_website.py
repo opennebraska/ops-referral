@@ -36,6 +36,23 @@ sns_plot = sns.barplot(data=df2, x="total_referrals", y="RaceEthnicity")
 plt.savefig('d2.png', bbox_inches='tight')
 plt.clf()
 
+sqlstr = """
+  WITH repeat_referrals AS (
+    SELECT RaceEthnicity, count(*) referral_count
+    FROM disc
+    GROUP BY "w"
+  )
+  SELECT referral_count, RaceEthnicity, count(*) students
+  FROM repeat_referrals
+  GROUP BY 1,2;
+"""
+df3 = pd.read_sql_query(sqlstr, con)
+print(df3.head())
+df3 = df3.pivot_table(index='referral_count', columns='RaceEthnicity', values='students')
+print(df3.head())
+sns_plot = sns.lineplot(data=df3)  # , x="students", y="referral_count")
+plt.savefig('d3.png', bbox_inches='tight')
+plt.clf()
 
 
 with document(title='Omaha Public Schools Referral (Disciplinary) Data Analysis') as doc:
@@ -47,6 +64,9 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data Analysis'
   h3('Total Referrals')
   raw(df2.to_html(index=False))
   raw('<img src="d2.png">')
+  h3('Number of referrals (> 0) per student')
+  raw(df3.to_html())
+  raw('<img src="d3.png">')
 
   # for path in photos:
   #   div(img(src=path), _class='photo')
