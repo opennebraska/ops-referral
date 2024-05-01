@@ -15,7 +15,7 @@ import sqlite3
 con = sqlite3.connect("ops.sqlite3")
 
 sqlstr = """
-  SELECT raceEthnicity, count(*) students
+  SELECT raceEthnicity, count(*) total_referrals
   FROM disc
   GROUP BY 1;
 """
@@ -26,8 +26,8 @@ print(df.head())
 # Ooops, nope, we need to change to_html() below apparently
 # df = df.drop(df.columns[[0]], axis=1)
 
-sns_plot = sns.barplot(data=df, x="RaceEthnicity", y="students")  # , hue='species', height=2.5)
-plt.savefig('d1.png')
+sns_plot = sns.barplot(data=df, x="total_referrals", y="RaceEthnicity")  # , hue='species', height=2.5)
+plt.savefig('d1.png', bbox_inches='tight')
 
 with document(title='Omaha Public Schools Referral (Disciplinary) Data Analysis') as doc:
   h1('Omaha Public Schools Referral (Disciplinary) Data Analysis')
