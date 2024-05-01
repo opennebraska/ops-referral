@@ -8,35 +8,34 @@ import pandas as pd
 import matplotlib.pyplot as plt   # https://pandas.pydata.org/docs/user_guide/visualization.html#basic-plotting-plot
 
 # For prettier plots: https://pandas.pydata.org/community/ecosystem.html
-import seaborn as sns  # Seaborn https://seaborn.pydata.org
+import seaborn as sns  # https://seaborn.pydata.org
 
 import sqlite3
 
 con = sqlite3.connect("ops.sqlite3")
 
 sqlstr = """
-  SELECT raceEthnicity, count(*)
+  SELECT raceEthnicity, count(*) students
   FROM disc
   GROUP BY 1;
 """
 df = pd.read_sql_query(sqlstr, con)
+print(df.head())
 
 # Discard 0th column which is just row numbers.
-# Ooops, nope we need to change to_html() below apparently
+# Ooops, nope, we need to change to_html() below apparently
 # df = df.drop(df.columns[[0]], axis=1)
 
-sns_plot = sns.pairplot(df)  # , hue='species', height=2.5)
+sns_plot = sns.barplot(data=df, x="RaceEthnicity", y="students")  # , hue='species', height=2.5)
 plt.savefig('d1.png')
-
-# plt = df.plot(kind="bar")
-# plt.savefig("d1.png")
-# plt.show()
 
 with document(title='Omaha Public Schools Referral (Disciplinary) Data Analysis') as doc:
   h1('Omaha Public Schools Referral (Disciplinary) Data Analysis')
   h2('2018-2019 School Year')
+  h3('Total Referrals')
   raw(df.to_html(index=False))
   raw('<img src="d1.png">')
+
   # for path in photos:
   #   div(img(src=path), _class='photo')
 
