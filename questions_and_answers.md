@@ -674,7 +674,7 @@ White|4876
 
 ### 3) PK through 3rd graders disaggregated by race. (Pie Chart)
 
-I'm not sure what "disaggregated" means.
+I'm not sure what "disaggregated" means. redundant?
 
 ### 4) What % of PK through 3rd grade students received discipline referrals by race? (Pie Chart)
 

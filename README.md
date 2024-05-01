@@ -73,7 +73,7 @@ sqlite> select grade, count(*) from disc group by 1 order by 1;
 7|20769
 8|18257
 9|11243
-HS|56     # ?
+HS|56     # Head Start. If children are in HS they may next attend PK OR KG 
 KG|3540   # Kindergarten
 PK|125    # Pre-K
 

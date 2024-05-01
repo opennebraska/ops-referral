@@ -1,6 +1,7 @@
 # https://stackoverflow.com/a/44350277/4656035
 FROM python
 RUN pip install "pandas[excel]"
+RUN pip install dominate
 RUN mkdir /home/report
 RUN mkdir /home/data
 
