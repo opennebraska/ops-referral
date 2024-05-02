@@ -69,8 +69,9 @@ plt.savefig('d3.png', bbox_inches='tight')
 plt.clf()
 
 sqlstr = """
-  SELECT *
+  SELECT referral_count, RaceEthnicity, sum(students) students
   FROM disc_cluster
+  GROUP BY 1, 2
 """
 df4 = pd.read_sql_query(sqlstr, con)
 print(df4.head())
@@ -91,9 +92,10 @@ sqlstr = """
   WITH mem AS (
     SELECT RaceEthnicity, sum(students) students FROM membership GROUP BY 1
   )
-  SELECT dc.referral_count, dc.RaceEthnicity, ROUND(dc.students * 1.0 / mem.students * 100, 2) percent
+  SELECT dc.referral_count, dc.RaceEthnicity, ROUND(sum(dc.students) * 1.0 / mem.students * 100, 2) percent
   FROM disc_cluster dc
   JOIN mem ON (dc.RaceEthnicity = mem.RaceEthnicity)
+  GROUP BY 1, 2
 """
 df5 = pd.read_sql_query(sqlstr, con)
 df5 = df5.pivot_table(index='referral_count', columns='RaceEthnicity', values='percent')
@@ -105,6 +107,48 @@ sns_plot = sns.lineplot(data=df5)
 sns_plot.set_xlabel('Referral Count')
 sns_plot.set_ylabel("% of students")
 plt.savefig('d5.png', bbox_inches='tight')
+plt.clf()
+
+sqlstr = """
+  SELECT referral_count, RaceEthnicity, sum(students) students
+  FROM disc_cluster
+  WHERE grade IN ('PK', 'KG', 1, 2, 3)
+  GROUP BY 1, 2
+"""
+df11 = pd.read_sql_query(sqlstr, con)
+print(df11.head())
+df11 = df11.pivot_table(index='referral_count', columns='RaceEthnicity', values='students')
+print(df11.head())
+print(df11.columns)
+# Change to Pandas int to get rid of all the ".0"s
+for r in raceEthnicity:
+  df11[r] = df11[r].astype('Int64')  # capital I
+print(df11.head())
+sns_plot = sns.lineplot(data=df11)
+sns_plot.set_xlabel("Referral Count")
+sns_plot.set_ylabel("Students")
+plt.savefig('d11.png', bbox_inches='tight')
+plt.clf()
+
+sqlstr = """
+  SELECT referral_count, RaceEthnicity, sum(students) students
+  FROM disc_cluster
+  WHERE grade IN (4, 5, 6)
+  GROUP BY 1, 2
+"""
+df21 = pd.read_sql_query(sqlstr, con)
+print(df21.head())
+df21 = df21.pivot_table(index='referral_count', columns='RaceEthnicity', values='students')
+print(df21.head())
+print(df21.columns)
+# Change to Pandas int to get rid of all the ".0"s
+for r in raceEthnicity:
+  df21[r] = df21[r].astype('Int64')  # capital I
+print(df21.head())
+sns_plot = sns.lineplot(data=df21)
+sns_plot.set_xlabel("Referral Count")
+sns_plot.set_ylabel("Students")
+plt.savefig('d21.png', bbox_inches='tight')
 plt.clf()
 
 
@@ -125,6 +169,12 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   h2('Percentage of students with referrals')
   raw(df5.to_html())
   raw('<img src="d5.png">')
+  h2('Pre-K through 3: Referrals')
+  raw(df11.to_html())
+  raw('<img src="d11.png">')
+  h2('Grades 4 through 6: Referrals')
+  raw(df21.to_html())
+  raw('<img src="d21.png">')
 
   # for path in photos:
   #   div(img(src=path), _class='photo')
