@@ -410,6 +410,58 @@ df214 = df214.pivot_table(index='resolutionName', columns='RaceEthnicity', value
 # for r in raceEthnicity:
 #   df204[r] = df204[r].astype('Int64')  # capital I
 
+# ======== PARENT ENGAGEMENT ============
+
+sqlstr = """
+SELECT resolutionName, count(*) count
+FROM disc
+WHERE Grade IN ('PK', 'KG', 1, 2, 3)
+AND resolutionName like '%parent%'
+COLLATE NOCASE
+GROUP BY 1;
+"""
+df300 = pd.read_sql_query(sqlstr, con)
+print(df300.head())
+
+sqlstr = """
+SELECT resolutionName, raceEthnicity, count(*) count
+FROM disc
+WHERE Grade IN ('PK', 'KG', 1, 2, 3)
+AND resolutionName like '%parent%'
+COLLATE NOCASE
+GROUP BY 1, 2;
+"""
+df301 = pd.read_sql_query(sqlstr, con)
+print(df301.head())
+df301 = df301.pivot_table(index='resolutionName', columns='RaceEthnicity', values='count')
+for r in raceEthnicity:
+  df301[r] = df301[r].astype('Int64')  # capital I
+
+sqlstr = """
+SELECT resolutionName, count(*) count
+FROM disc
+WHERE Grade IN (4, 5, 6)
+AND resolutionName like '%parent%'
+COLLATE NOCASE
+GROUP BY 1;
+"""
+df310 = pd.read_sql_query(sqlstr, con)
+print(df310.head())
+
+sqlstr = """
+SELECT resolutionName, raceEthnicity, count(*) count
+FROM disc
+WHERE Grade IN (4, 5, 6)
+AND resolutionName like '%parent%'
+COLLATE NOCASE
+GROUP BY 1, 2;
+"""
+df311 = pd.read_sql_query(sqlstr, con)
+print(df311.head())
+df311 = df311.pivot_table(index='resolutionName', columns='RaceEthnicity', values='count')
+for r in raceEthnicity:
+  df311[r] = df311[r].astype('Int64')  # capital I
+
 
 with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019') as doc:
   h1('Omaha Public Schools 2018-2019')
@@ -468,6 +520,15 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   raw('<img src="d212.png">')
   p(raw(df213.to_html(index=False)))
   raw(df214.to_html())
+
+  h2('Parent Engagement')
+  h3('Pre-K through 3')
+  raw(df300.to_html(index=False))
+  p(raw(df301.to_html()))
+
+  h3('Grades 4 through 6')
+  raw(df310.to_html(index=False))
+  p(raw(df311.to_html()))
 
   # for path in photos:
   #   div(img(src=path), _class='photo')
