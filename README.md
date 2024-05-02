@@ -30,22 +30,21 @@ flowchart TD
   cluster2.pl-->disc_cluster2[[disc_cluster2]]
   disc-->by_race.pl
   by_race.pl-->reasons[[reasons]]
-  %% subgraph SQLite
-  %%   disc
-  %%   membership_raw
-  %%   membership
-  %%   disc_cluster
-  %%   disc_cluster2
-  %%   reasons
-  %% end
-  disc-->Dockerfile-html["`Dockerfile-html
+  subgraph SQLite1 [SQLite]
+    disc
+    membership_raw
+  end
+  subgraph SQLite2 [SQLite]
+    membership
+    disc_cluster
+    disc_cluster2
+    reasons
+    resolution_categories
+  end
+  SQLite2-->Dockerfile-html["`Dockerfile-html
     generate_website.py`"]
-  membership-->Dockerfile-html
-  reasons-->Dockerfile-html
-  disc_cluster-->Dockerfile-html
-  disc_cluster2-->Dockerfile-html
-  resolution_categories-->Dockerfile-html
-  Dockerfile-html-->html
+  %% SQLite2-->Dockerfile-html
+  Dockerfile-html-->index.html
   Dockerfile-html-->d*.png
 ```
 
