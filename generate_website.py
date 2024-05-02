@@ -109,6 +109,20 @@ sns_plot.set_ylabel("% of students")
 plt.savefig('d5.png', bbox_inches='tight')
 plt.clf()
 
+# -------------- Pre-K through 3 -------------------
+
+sqlstr = """
+  SELECT raceEthnicity, sum(students) students
+  FROM membership
+  WHERE grade IN ('PK', 'KG', 1, 2, 3)
+  GROUP BY 1;
+"""
+df10 = pd.read_sql_query(sqlstr, con)
+print(df10.head())
+# sns_plot = sns.barplot(data=df10, x="students", y="RaceEthnicity")
+# plt.savefig('d10.png', bbox_inches='tight')
+# plt.clf()
+
 sqlstr = """
   SELECT referral_count, RaceEthnicity, sum(students) students
   FROM disc_cluster
@@ -131,6 +145,42 @@ plt.savefig('d11.png', bbox_inches='tight')
 plt.clf()
 
 sqlstr = """
+  WITH mem AS (
+    SELECT RaceEthnicity, sum(students) students
+    FROM membership
+    WHERE grade IN ('PK', 'KG', 1, 2, 3)
+    GROUP BY 1
+  )
+  SELECT dc.referral_count, dc.RaceEthnicity, ROUND(sum(dc.students) * 1.0 / mem.students * 100, 2) percent
+  FROM disc_cluster dc
+  JOIN mem ON (dc.RaceEthnicity = mem.RaceEthnicity)
+  WHERE grade IN ('PK', 'KG', 1, 2, 3)
+  GROUP BY 1, 2
+"""
+df12 = pd.read_sql_query(sqlstr, con)
+df12 = df12.pivot_table(index='referral_count', columns='RaceEthnicity', values='percent')
+print(df12.head())
+sns_plot = sns.lineplot(data=df12)
+sns_plot.set_xlabel('Referral Count')
+sns_plot.set_ylabel("% of students")
+plt.savefig('d12.png', bbox_inches='tight')
+plt.clf()
+
+# -------------- Grades 4,5,6 -------------------
+
+sqlstr = """
+  SELECT raceEthnicity, sum(students) students
+  FROM membership
+  WHERE grade IN (4, 5, 6)
+  GROUP BY 1;
+"""
+df20 = pd.read_sql_query(sqlstr, con)
+print(df20.head())
+# sns_plot = sns.barplot(data=df20, x="students", y="RaceEthnicity")
+# plt.savefig('d20.png', bbox_inches='tight')
+# plt.clf()
+
+sqlstr = """
   SELECT referral_count, RaceEthnicity, sum(students) students
   FROM disc_cluster
   WHERE grade IN (4, 5, 6)
@@ -151,30 +201,65 @@ sns_plot.set_ylabel("Students")
 plt.savefig('d21.png', bbox_inches='tight')
 plt.clf()
 
+sqlstr = """
+  WITH mem AS (
+    SELECT RaceEthnicity, sum(students) students
+    FROM membership
+    WHERE grade IN (4, 5, 6)
+    GROUP BY 1
+  )
+  SELECT dc.referral_count, dc.RaceEthnicity, ROUND(sum(dc.students) * 1.0 / mem.students * 100, 2) percent
+  FROM disc_cluster dc
+  JOIN mem ON (dc.RaceEthnicity = mem.RaceEthnicity)
+  WHERE grade IN (4, 5, 6)
+  GROUP BY 1, 2
+"""
+df22 = pd.read_sql_query(sqlstr, con)
+df22 = df22.pivot_table(index='referral_count', columns='RaceEthnicity', values='percent')
+print(df22.head())
+sns_plot = sns.lineplot(data=df22)
+sns_plot.set_xlabel('Referral Count')
+sns_plot.set_ylabel("% of students")
+plt.savefig('d22.png', bbox_inches='tight')
+plt.clf()
+
 
 with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019') as doc:
   h1('Omaha Public Schools 2018-2019')
   raw('Referral (disciplinary) data analysis. <a href="https://github.com/opennebraska/ops-referral">[Source code]</a>')
+
   h2('Students')
   raw(df1.to_html(index=False))
   raw('<img src="d1.png">')
-  h2('Total Referrals')
+
+  h2('Overall Discipline Picture')
   raw(df2.to_html(index=False))
   raw('<img src="d2.png">')
-  h2('Count of referrals')
   # raw(df3.to_html())
   raw(df4.to_html())
   raw('<img src="d4.png">')
   raw('<img src="d3.png">')
-  h2('Percentage of students with referrals')
+  p('Percentage of students')
   raw(df5.to_html())
   raw('<img src="d5.png">')
-  h2('Pre-K through 3: Referrals')
+
+  h3('Pre-K through 3')
+  p(raw(df10.to_html(index=False)))
   raw(df11.to_html())
   raw('<img src="d11.png">')
-  h2('Grades 4 through 6: Referrals')
+  p('Percentage of students')
+  raw(df12.to_html())
+  raw('<img src="d12.png">')
+
+  h3('Grades 4 through 6')
+  p(raw(df20.to_html(index=False)))
   raw(df21.to_html())
   raw('<img src="d21.png">')
+  p('Percentage of students')
+  raw(df22.to_html())
+  raw('<img src="d22.png">')
+
+  h2('Reasons for Referrals')
 
   # for path in photos:
   #   div(img(src=path), _class='photo')
