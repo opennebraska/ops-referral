@@ -476,6 +476,7 @@ print("JAY2:", type(df400.at["Emergency Exclusion", "Asian"]))  # <NA> is <class
 # df400 = df400.replace({np.nan: pd.NA})
 for r in raceEthnicity:
   df400[r] = df400[r].astype('Int64')  # capital I
+df400 = df400.replace({np.nan: 0})
 print(df400.head())
 
 sqlstr = """
@@ -502,22 +503,43 @@ df401 = df401.pivot_table(index='resolutionName', columns='RaceEthnicity', value
 print(df401.head())
 
 sqlstr = """
-WITH all_disc AS (
-  SELECT RaceEthnicity, count(*) cnt
-  FROM disc
-  GROUP BY 1
-)
-SELECT disc.resolutionName, disc.RaceEthnicity, round(count(*) * 1.0 / all_disc.cnt * 100, 2) perc
-FROM disc
-JOIN all_disc ON (disc.RaceEthnicity = all_disc.RaceEthnicity)
-WHERE resolutionName like '%suspen%'
-COLLATE NOCASE
-GROUP BY 1;
+  SELECT referral_count, RaceEthnicity, sum(students) students
+  FROM disc_cluster2
+  GROUP BY 1, 2
 """
 df402 = pd.read_sql_query(sqlstr, con)
+df402 = df402.pivot_table(index='referral_count', columns='RaceEthnicity', values='students')
+for r in raceEthnicity:
+  df402[r] = df402[r].astype('Int64')  # capital I
 print(df402.head())
-df402 = df402.pivot_table(index='resolutionName', columns='RaceEthnicity', values='perc')
+sns_plot = sns.lineplot(data=df402)
+sns_plot.set_xlabel("Referral Count")
+sns_plot.set_ylabel("Students")
+plt.savefig('d402.png', bbox_inches='tight')
+plt.clf()
 
+sqlstr = """
+  WITH mem AS (
+    SELECT RaceEthnicity, sum(students) students
+    FROM membership
+    GROUP BY 1
+  )
+  SELECT dc.referral_count, dc.RaceEthnicity, ROUND(sum(dc.students) * 1.0 / mem.students * 100, 2) percent
+  FROM disc_cluster2 dc
+  JOIN mem ON (dc.RaceEthnicity = mem.RaceEthnicity)
+  GROUP BY 1, 2
+"""
+df403 = pd.read_sql_query(sqlstr, con)
+df403 = df403.pivot_table(index='referral_count', columns='RaceEthnicity', values='percent')
+print(df403.head())
+sns_plot = sns.lineplot(data=df403)
+sns_plot.set_xlabel('Referral Count')
+sns_plot.set_ylabel("% of students")
+plt.savefig('d403.png', bbox_inches='tight')
+plt.clf()
+
+
+make_zero_empty = lambda x: ""
 
 with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019') as doc:
   h1('Omaha Public Schools 2018-2019')
@@ -587,10 +609,16 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   p(raw(df311.to_html()))
 
   h2('Suspension, Expulsion, Exclusion')
-  raw(df400.to_html(na_rep=""))
+  p('Count of referrals:')
+  raw(df400.to_html(na_rep="", formatters={0: make_zero_empty}))
   p('Percentage of referrals:')
   p(raw(df401.to_html(na_rep="")))
+  p('Student count:')
   p(raw(df402.to_html()))
+  raw('<img src="d402.png">')
+  p('Percentage of students:')
+  p(raw(df403.to_html()))
+  raw('<img src="d403.png">')
 
   # for path in photos:
   #   div(img(src=path), _class='photo')
