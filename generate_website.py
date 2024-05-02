@@ -314,6 +314,31 @@ plt.savefig('d202.png', bbox_inches='tight')
 plt.clf()
 
 sqlstr = """
+SELECT resolutionName, count(*)
+FROM disc
+WHERE Grade IN ('PK', 'KG', 1, 2, 3)
+AND resolutionName like '%referral%'
+COLLATE NOCASE
+GROUP BY 1;
+"""
+df203 = pd.read_sql_query(sqlstr, con)
+print(df203.head())
+
+sqlstr = """
+SELECT resolutionName, raceEthnicity, count(*) count
+FROM disc
+WHERE Grade IN ('PK', 'KG', 1, 2, 3)
+AND resolutionName like '%referral%'
+COLLATE NOCASE
+GROUP BY 1, 2;
+"""
+df204 = pd.read_sql_query(sqlstr, con)
+print(df204.head())
+df204 = df204.pivot_table(index='resolutionName', columns='RaceEthnicity', values='count')
+# for r in raceEthnicity:
+#   df204[r] = df204[r].astype('Int64')  # capital I
+
+sqlstr = """
   SELECT rc.category, count(*)
   FROM disc
   JOIN resolution_categories rc ON (disc.resolutionName = rc.resolutionName)
@@ -359,6 +384,31 @@ print(df212.head())
 df212.T.plot(kind='barh', stacked=True, xlabel="%")
 plt.savefig('d212.png', bbox_inches='tight')
 plt.clf()
+
+sqlstr = """
+SELECT resolutionName, count(*)
+FROM disc
+WHERE Grade IN (4, 5, 6)
+AND resolutionName like '%referral%'
+COLLATE NOCASE
+GROUP BY 1;
+"""
+df213 = pd.read_sql_query(sqlstr, con)
+print(df213.head())
+
+sqlstr = """
+SELECT resolutionName, raceEthnicity, count(*) count
+FROM disc
+WHERE Grade IN (4, 5, 6)
+AND resolutionName like '%referral%'
+COLLATE NOCASE
+GROUP BY 1, 2;
+"""
+df214 = pd.read_sql_query(sqlstr, con)
+print(df214.head())
+df214 = df214.pivot_table(index='resolutionName', columns='RaceEthnicity', values='count')
+# for r in raceEthnicity:
+#   df204[r] = df204[r].astype('Int64')  # capital I
 
 
 with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019') as doc:
@@ -409,11 +459,15 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   raw(df200.to_html(index=False))
   p(raw(df201.to_html()))
   raw('<img src="d202.png">')
+  p(raw(df203.to_html(index=False)))
+  raw(df204.to_html())
 
   h3('Grades 4 through 6')
   raw(df210.to_html(index=False))
   p(raw(df211.to_html()))
   raw('<img src="d212.png">')
+  p(raw(df213.to_html(index=False)))
+  raw(df214.to_html())
 
   # for path in photos:
   #   div(img(src=path), _class='photo')
