@@ -259,6 +259,106 @@ sqlstr = """
 df111 = pd.read_sql_query(sqlstr, con)
 print(df111.head())
 
+# ======== RESOLUTIONS ============
+
+sqlstr = """
+  SELECT rc.category, count(*)
+  FROM disc
+  JOIN resolution_categories rc ON (disc.resolutionName = rc.resolutionName)
+  AND Grade IN ('PK', 'KG', 1, 2, 3)
+  GROUP BY 1
+"""
+df200 = pd.read_sql_query(sqlstr, con)
+print(df200.head())
+
+sqlstr = """
+  SELECT rc.category, raceEthnicity, count(*) count
+  FROM disc
+  JOIN resolution_categories rc ON (disc.resolutionName = rc.resolutionName)
+  AND Grade IN ('PK', 'KG', 1, 2, 3)
+  GROUP BY 1, 2
+"""
+df201 = pd.read_sql_query(sqlstr, con)
+print(df201.head())
+df201 = df201.pivot_table(index='category', columns='RaceEthnicity', values='count')
+for r in raceEthnicity:
+  df201[r] = df201[r].astype('Int64')  # capital I
+
+sqlstr = """
+  WITH total_by_race AS (
+    SELECT raceEthnicity, count(*) count
+    FROM disc
+    JOIN resolution_categories rc ON (disc.resolutionName = rc.resolutionName)
+    AND Grade IN ('PK', 'KG', 1, 2, 3)
+    GROUP BY 1
+  )
+  SELECT rc.category, disc.raceEthnicity, count(*) * 1.0 / tbr.count * 100 count
+  FROM disc
+  JOIN resolution_categories rc ON (disc.resolutionName = rc.resolutionName)
+  JOIN total_by_race tbr ON (disc.raceEthnicity = tbr.raceEthnicity)
+  AND Grade IN ('PK', 'KG', 1, 2, 3)
+  GROUP BY 1, 2
+"""
+df202 = pd.read_sql_query(sqlstr, con)
+print(df202.head())
+df202 = df202.pivot_table(index='category', columns='RaceEthnicity', values='count')
+print(df202.head())
+# nope, no stacking, I get error bars
+#   sns_plot = sns.barplot(data=df201)  # , x="category", y="RaceEthnicity")
+# nope, no stacking, I get error bars
+#   df202.plot(kind='bar', stacked=True)
+# nope set_index part fails
+#   df202.set_index('category').T.plot(kind='bar', stacked=True)
+df202.T.plot(kind='barh', stacked=True, xlabel="%")
+plt.savefig('d202.png', bbox_inches='tight')
+plt.clf()
+
+sqlstr = """
+  SELECT rc.category, count(*)
+  FROM disc
+  JOIN resolution_categories rc ON (disc.resolutionName = rc.resolutionName)
+  AND Grade IN (4, 5, 6)
+  GROUP BY 1
+"""
+df210 = pd.read_sql_query(sqlstr, con)
+print(df210.head())
+
+sqlstr = """
+  SELECT rc.category, raceEthnicity, count(*) count
+  FROM disc
+  JOIN resolution_categories rc ON (disc.resolutionName = rc.resolutionName)
+  AND Grade IN (4, 5, 6)
+  GROUP BY 1, 2
+"""
+df211 = pd.read_sql_query(sqlstr, con)
+print(df211.head())
+df211 = df211.pivot_table(index='category', columns='RaceEthnicity', values='count')
+for r in raceEthnicity:
+  df211[r] = df211[r].astype('Int64')  # capital I
+print(df211.head())
+
+sqlstr = """
+  WITH total_by_race AS (
+    SELECT raceEthnicity, count(*) count
+    FROM disc
+    JOIN resolution_categories rc ON (disc.resolutionName = rc.resolutionName)
+    AND Grade IN (4, 5, 6)
+    GROUP BY 1
+  )
+  SELECT rc.category, disc.raceEthnicity, count(*) * 1.0 / tbr.count * 100 count
+  FROM disc
+  JOIN resolution_categories rc ON (disc.resolutionName = rc.resolutionName)
+  JOIN total_by_race tbr ON (disc.raceEthnicity = tbr.raceEthnicity)
+  AND Grade IN (4, 5, 6)
+  GROUP BY 1, 2
+"""
+df212 = pd.read_sql_query(sqlstr, con)
+print(df212.head())
+df212 = df212.pivot_table(index='category', columns='RaceEthnicity', values='count')
+print(df212.head())
+df212.T.plot(kind='barh', stacked=True, xlabel="%")
+plt.savefig('d212.png', bbox_inches='tight')
+plt.clf()
 
 
 with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019') as doc:
@@ -303,6 +403,17 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   h3('Grades 4 through 6')
   raw(df110.to_html(index=False))
   p(raw(df111.to_html(index=False)))
+
+  h2('Resolutions')
+  h3('Pre-K through 3')
+  raw(df200.to_html(index=False))
+  p(raw(df201.to_html()))
+  raw('<img src="d202.png">')
+
+  h3('Grades 4 through 6')
+  raw(df210.to_html(index=False))
+  p(raw(df211.to_html()))
+  raw('<img src="d212.png">')
 
   # for path in photos:
   #   div(img(src=path), _class='photo')
