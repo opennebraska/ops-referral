@@ -5,6 +5,7 @@ from dominate import document
 from dominate.tags import *
 from dominate.util import raw
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt   # https://pandas.pydata.org/docs/user_guide/visualization.html#basic-plotting-plot
 
 # For prettier plots: https://pandas.pydata.org/community/ecosystem.html
@@ -51,7 +52,7 @@ sqlstr = """
   GROUP BY 1,2;
 """
 df3 = pd.read_sql_query(sqlstr, con)
-print(df3.head())
+# print(df3.head())
 df3 = df3.pivot_table(index='referral_count', columns='RaceEthnicity', values='students')
 print(df3.head())
 
@@ -76,14 +77,12 @@ sqlstr = """
   GROUP BY 1, 2
 """
 df4 = pd.read_sql_query(sqlstr, con)
-print(df4.head())
 df4 = df4.pivot_table(index='referral_count', columns='RaceEthnicity', values='students')
 print(df4.head())
-print(df4.columns)
+# print(df4.columns)
 # Change to Pandas int to get rid of all the ".0"s
 for r in raceEthnicity:
   df4[r] = df4[r].astype('Int64')  # capital I
-print(df4.head())
 sns_plot = sns.lineplot(data=df4)
 sns_plot.set_xlabel("Referral Count")
 sns_plot.set_ylabel("Students")
@@ -129,14 +128,11 @@ sqlstr = """
   GROUP BY 1, 2
 """
 df11 = pd.read_sql_query(sqlstr, con)
-print(df11.head())
 df11 = df11.pivot_table(index='referral_count', columns='RaceEthnicity', values='students')
 print(df11.head())
-print(df11.columns)
 # Change to Pandas int to get rid of all the ".0"s
 for r in raceEthnicity:
   df11[r] = df11[r].astype('Int64')  # capital I
-print(df11.head())
 sns_plot = sns.lineplot(data=df11)
 sns_plot.set_xlabel("Referral Count")
 sns_plot.set_ylabel("Students")
@@ -183,10 +179,7 @@ sqlstr = """
   GROUP BY 1, 2
 """
 df21 = pd.read_sql_query(sqlstr, con)
-print(df21.head())
 df21 = df21.pivot_table(index='referral_count', columns='RaceEthnicity', values='students')
-print(df21.head())
-print(df21.columns)
 # Change to Pandas int to get rid of all the ".0"s
 for r in raceEthnicity:
   df21[r] = df21[r].astype('Int64')  # capital I
@@ -300,7 +293,6 @@ sqlstr = """
   GROUP BY 1, 2
 """
 df202 = pd.read_sql_query(sqlstr, con)
-print(df202.head())
 df202 = df202.pivot_table(index='category', columns='RaceEthnicity', values='count')
 print(df202.head())
 # nope, no stacking, I get error bars
@@ -356,7 +348,6 @@ sqlstr = """
   GROUP BY 1, 2
 """
 df211 = pd.read_sql_query(sqlstr, con)
-print(df211.head())
 df211 = df211.pivot_table(index='category', columns='RaceEthnicity', values='count')
 for r in raceEthnicity:
   df211[r] = df211[r].astype('Int64')  # capital I
@@ -378,7 +369,6 @@ sqlstr = """
   GROUP BY 1, 2
 """
 df212 = pd.read_sql_query(sqlstr, con)
-print(df212.head())
 df212 = df212.pivot_table(index='category', columns='RaceEthnicity', values='count')
 print(df212.head())
 df212.T.plot(kind='barh', stacked=True, xlabel="%")
@@ -407,6 +397,7 @@ GROUP BY 1, 2;
 df214 = pd.read_sql_query(sqlstr, con)
 print(df214.head())
 df214 = df214.pivot_table(index='resolutionName', columns='RaceEthnicity', values='count')
+print("JAY1:", type(df214.at["Referral to Community Agency", "Asian"]))  # NaN is <class 'numpy.float64'>
 # for r in raceEthnicity:
 #   df204[r] = df204[r].astype('Int64')  # capital I
 
@@ -432,10 +423,10 @@ COLLATE NOCASE
 GROUP BY 1, 2;
 """
 df301 = pd.read_sql_query(sqlstr, con)
-print(df301.head())
 df301 = df301.pivot_table(index='resolutionName', columns='RaceEthnicity', values='count')
 for r in raceEthnicity:
   df301[r] = df301[r].astype('Int64')  # capital I
+print(df301.head())
 
 sqlstr = """
 SELECT resolutionName, count(*) count
@@ -461,6 +452,71 @@ print(df311.head())
 df311 = df311.pivot_table(index='resolutionName', columns='RaceEthnicity', values='count')
 for r in raceEthnicity:
   df311[r] = df311[r].astype('Int64')  # capital I
+
+# ======== SUSPENSIONS / EXPULSIONS / EXCLUSION ============
+
+sqlstr = """
+SELECT resolutionName, RaceEthnicity, count(*) count
+FROM disc
+WHERE (
+  resolutionName like '%suspen%' OR
+  resolutionName like '%expelled%' OR
+  resolutionName like '%emergency%' OR
+  resolutionName like '%law enfor%'
+)
+COLLATE NOCASE
+GROUP BY 1, 2
+"""
+df400 = pd.read_sql_query(sqlstr, con)
+df400 = df400.pivot_table(index='resolutionName', columns='RaceEthnicity', values='count')
+# ... no idea why <numpy.float64> is sometimes NaN (which disappears nicely in to_html() below,
+# but sometimes it's <NA> which refuses to disappear in to_html() below.
+print("JAY2:", type(df400.at["Emergency Exclusion", "Asian"]))  # <NA> is <class 'numpy.float64'>
+# ... uhh... this accomplishes nothing
+# df400 = df400.replace({np.nan: pd.NA})
+for r in raceEthnicity:
+  df400[r] = df400[r].astype('Int64')  # capital I
+print(df400.head())
+
+sqlstr = """
+WITH all_disc AS (
+  SELECT RaceEthnicity, count(*) all_cnt
+  FROM disc
+  GROUP BY 1
+)
+SELECT resolutionName, disc.RaceEthnicity,
+  round(count(*) * 1.0 / all_cnt * 100, 2) perc
+FROM disc
+JOIN all_disc ON (disc.RaceEthnicity = all_disc.RaceEthnicity)
+WHERE (
+  resolutionName like '%suspen%' OR
+  resolutionName like '%expelled%' OR
+  resolutionName like '%emergency%' OR
+  resolutionName like '%law enfor%'
+)
+COLLATE NOCASE
+GROUP BY 1, 2
+"""
+df401 = pd.read_sql_query(sqlstr, con)
+df401 = df401.pivot_table(index='resolutionName', columns='RaceEthnicity', values='perc')
+print(df401.head())
+
+sqlstr = """
+WITH all_disc AS (
+  SELECT RaceEthnicity, count(*) cnt
+  FROM disc
+  GROUP BY 1
+)
+SELECT disc.resolutionName, disc.RaceEthnicity, round(count(*) * 1.0 / all_disc.cnt * 100, 2) perc
+FROM disc
+JOIN all_disc ON (disc.RaceEthnicity = all_disc.RaceEthnicity)
+WHERE resolutionName like '%suspen%'
+COLLATE NOCASE
+GROUP BY 1;
+"""
+df402 = pd.read_sql_query(sqlstr, con)
+print(df402.head())
+df402 = df402.pivot_table(index='resolutionName', columns='RaceEthnicity', values='perc')
 
 
 with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019') as doc:
@@ -529,6 +585,12 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   h3('Grades 4 through 6')
   raw(df310.to_html(index=False))
   p(raw(df311.to_html()))
+
+  h2('Suspension, Expulsion, Exclusion')
+  raw(df400.to_html(na_rep=""))
+  p('Percentage of referrals:')
+  p(raw(df401.to_html(na_rep="")))
+  p(raw(df402.to_html()))
 
   # for path in photos:
   #   div(img(src=path), _class='photo')
