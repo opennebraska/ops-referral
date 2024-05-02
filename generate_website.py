@@ -87,6 +87,25 @@ sns_plot.set_ylabel("Students")
 plt.savefig('d4.png', bbox_inches='tight')
 plt.clf()
 
+sqlstr = """
+  WITH mem AS (
+    SELECT RaceEthnicity, sum(students) students FROM membership GROUP BY 1
+  )
+  SELECT dc.referral_count, dc.RaceEthnicity, ROUND(dc.students * 1.0 / mem.students * 100, 2) percent
+  FROM disc_cluster dc
+  JOIN mem ON (dc.RaceEthnicity = mem.RaceEthnicity)
+"""
+df5 = pd.read_sql_query(sqlstr, con)
+df5 = df5.pivot_table(index='referral_count', columns='RaceEthnicity', values='percent')
+# Change to Pandas int to get rid of all the ".0"s
+# for r in raceEthnicity:
+#   df4[r] = df4[r].astype('Int64')  # capital I
+print(df5.head())
+sns_plot = sns.lineplot(data=df5)
+sns_plot.set_xlabel('Referral Count')
+sns_plot.set_ylabel("% of students")
+plt.savefig('d5.png', bbox_inches='tight')
+plt.clf()
 
 
 with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019') as doc:
@@ -98,11 +117,14 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   h2('Total Referrals')
   raw(df2.to_html(index=False))
   raw('<img src="d2.png">')
-  h2('Number of referrals > 0')
+  h2('Count of referrals')
   # raw(df3.to_html())
   raw(df4.to_html())
   raw('<img src="d4.png">')
   raw('<img src="d3.png">')
+  h2('Percentage of students with referrals')
+  raw(df5.to_html())
+  raw('<img src="d5.png">')
 
   # for path in photos:
   #   div(img(src=path), _class='photo')
