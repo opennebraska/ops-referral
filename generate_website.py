@@ -16,6 +16,8 @@ raceEthnicity = ['African American', 'Asian', 'Hispanic', 'Multi Racial', 'Nativ
 
 con = sqlite3.connect("ops.sqlite3")
 
+# ======== OVERALL DISCIPLINE PICTURE ============
+
 sqlstr = """
   SELECT raceEthnicity, sum(students) students
   FROM membership
@@ -119,9 +121,6 @@ sqlstr = """
 """
 df10 = pd.read_sql_query(sqlstr, con)
 print(df10.head())
-# sns_plot = sns.barplot(data=df10, x="students", y="RaceEthnicity")
-# plt.savefig('d10.png', bbox_inches='tight')
-# plt.clf()
 
 sqlstr = """
   SELECT referral_count, RaceEthnicity, sum(students) students
@@ -176,9 +175,6 @@ sqlstr = """
 """
 df20 = pd.read_sql_query(sqlstr, con)
 print(df20.head())
-# sns_plot = sns.barplot(data=df20, x="students", y="RaceEthnicity")
-# plt.savefig('d20.png', bbox_inches='tight')
-# plt.clf()
 
 sqlstr = """
   SELECT referral_count, RaceEthnicity, sum(students) students
@@ -223,6 +219,47 @@ sns_plot.set_ylabel("% of students")
 plt.savefig('d22.png', bbox_inches='tight')
 plt.clf()
 
+# ======== REASONS FOR REFERRALS ============
+
+sqlstr = """
+  SELECT eventName, count(*)
+  FROM disc
+  WHERE Grade IN ('PK', 'KG', 1, 2, 3)
+  GROUP BY 1
+  ORDER BY 2 DESC
+  LIMIT 10;
+"""
+df100 = pd.read_sql_query(sqlstr, con)
+print(df100.head())
+
+sqlstr = """
+  SELECT raceEthnicity, eventName, occurrences
+  FROM reasons
+  WHERE grades = '''PK'', ''KG'', 1, 2, 3'
+"""
+df101 = pd.read_sql_query(sqlstr, con)
+print(df101.head())
+
+sqlstr = """
+  SELECT eventName, count(*)
+  FROM disc
+  WHERE grade IN (4, 5, 6)
+  GROUP BY 1
+  ORDER BY 2 DESC
+  LIMIT 10;
+"""
+df110 = pd.read_sql_query(sqlstr, con)
+print(df110.head())
+
+sqlstr = """
+  SELECT raceEthnicity, eventName, occurrences
+  FROM reasons
+  WHERE grades = '4, 5, 6'
+"""
+df111 = pd.read_sql_query(sqlstr, con)
+print(df111.head())
+
+
 
 with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019') as doc:
   h1('Omaha Public Schools 2018-2019')
@@ -260,6 +297,12 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   raw('<img src="d22.png">')
 
   h2('Reasons for Referrals')
+  h3('Pre-K through 3')
+  raw(df100.to_html(index=False))
+  p(raw(df101.to_html(index=False)))
+  h3('Grades 4 through 6')
+  raw(df110.to_html(index=False))
+  p(raw(df111.to_html(index=False)))
 
   # for path in photos:
   #   div(img(src=path), _class='photo')

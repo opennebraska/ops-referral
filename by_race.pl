@@ -14,6 +14,18 @@ if (not defined $grades) {
 }
 
 my $dbh = DBI->connect("dbi:SQLite:dbname=ops.sqlite3","","");
+
+# Ummm... not sure how to handle clean start vs. multiple runs for this:
+# $dbh->do("DROP TABLE IF EXISTS reasons");
+# $dbh->do("
+#   CREATE TABLE reasons (
+#     grades TEXT,
+#     raceEthnicity TEXT,
+#     eventName TEXT,
+#     occurrences INT
+#   )
+# ");
+
 my $strsql = <<SQL;
   SELECT RaceEthnicity, eventName, count(*)
   FROM disc
@@ -23,7 +35,13 @@ my $strsql = <<SQL;
   ORDER BY 3 DESC
   LIMIT 10;
 SQL
-my $sth = $dbh->prepare($strsql);
+my $sth1 = $dbh->prepare($strsql);
+
+$strsql = <<SQL;
+  INSERT INTO reasons (grades, raceEthnicity, eventName, occurrences)
+  VALUES (?, ?, ?, ?)
+SQL
+my $sth2 = $dbh->prepare($strsql);
 
 foreach my $race (
   "African American",
@@ -34,9 +52,10 @@ foreach my $race (
   "Pacific Islander",
   "White",
 ) {
-  $sth->execute($race);
-  while (my @row = $sth->fetchrow) {
+  $sth1->execute($race);
+  while (my @row = $sth1->fetchrow) {
     say join "|", @row;
+    $sth2->execute($grades, @row);
   }
 }
 
