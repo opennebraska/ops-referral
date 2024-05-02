@@ -11,6 +11,44 @@ The remainder of this document intends to show all the recreation steps for runn
 analysis we performed, from scratch (.xlsx). Hopefully this work is useful for future
 years of updated data.
 
+## Overview
+
+```mermaid
+flowchart TD
+  xlsx1-->Dockerfile-xlsx["`Dockerfile-xlsx
+    xlsx_to_sqlite.py`"]
+  xlsx2-->Dockerfile-xlsx
+  Dockerfile-xlsx-->disc[[disc]]
+  Dockerfile-xlsx-->membership_raw[[membership_raw]]
+  disc<-->resolution_categories.sql
+  resolution_categories.sql-->resolution_categories[[resolution_categories]]
+  membership_raw-->membership.pl
+  membership.pl-->membership[[membership]]
+  disc-->cluster.pl
+  cluster.pl-->disc_cluster[[disc_cluster]]
+  disc-->cluster2.pl
+  cluster2.pl-->disc_cluster2[[disc_cluster2]]
+  disc-->by_race.pl
+  by_race.pl-->reasons[[reasons]]
+  %% subgraph SQLite
+  %%   disc
+  %%   membership_raw
+  %%   membership
+  %%   disc_cluster
+  %%   disc_cluster2
+  %%   reasons
+  %% end
+  disc-->Dockerfile-html["`Dockerfile-html
+    generate_website.py`"]
+  membership-->Dockerfile-html
+  reasons-->Dockerfile-html
+  disc_cluster-->Dockerfile-html
+  disc_cluster2-->Dockerfile-html
+  resolution_categories-->Dockerfile-html
+  Dockerfile-html-->html
+  Dockerfile-html-->d*.png
+```
+
 ## Step 1: Turn .xlsx files into a SQLite database
 
 We don't have Microsoft Excel, so can't natively attempt a CSV export of the spreadsheets.
