@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Omaha Public Schools Referral (Disciplinary) Data 2018-2019</title>
+  </head>
+  <body>
+    <h1>Omaha Public Schools 2018-2019</h1>Referral (disciplinary) data analysis. <a href="https://github.com/opennebraska/ops-referral">[Source code]</a>
+    <h2>Students</h2><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>RaceEthnicity</th>
+      <th>students</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>African American</td>
+      <td>13124</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>3421</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>19213</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>2868</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>444</td>
+    </tr>
+    <tr>
+      <td>Pacific Islander</td>
+      <td>79</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>14031</td>
+    </tr>
+  </tbody>
+</table><img src="d1.png">
+    <h2>Overall Discipline Picture</h2><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>RaceEthnicity</th>
+      <th>total_referrals</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>African American</td>
+      <td>66990</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>1369</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>24687</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>8680</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>1311</td>
+    </tr>
+    <tr>
+      <td>Pacific Islander</td>
+      <td>196</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>19525</td>
+    </tr>
+  </tbody>
+</table><img src="d2.png"><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>RaceEthnicity</th>
+      <th>African American</th>
+      <th>Asian</th>
+      <th>Hispanic</th>
+      <th>Multi Racial</th>
+      <th>Native American</th>
+      <th>Pacific Islander</th>
+      <th>White</th>
+    </tr>
+    <tr>
+      <th>referral_count</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>02 or more</th>
+      <td>5177</td>
+      <td>213</td>
+      <td>2818</td>
+      <td>784</td>
+      <td>138</td>
+      <td>14</td>
+      <td>2151</td>
+    </tr>
+    <tr>
+      <th>05 or more</th>
+      <td>3313</td>
+      <td>77</td>
+      <td>1410</td>
+      <td>479</td>
+      <td>76</td>
+      <td>8</td>
+      <td>1070</td>
+    </tr>
+    <tr>
+      <th>10 or more</th>
+      <td>2055</td>
+      <td>30</td>
+      <td>706</td>
+      <td>284</td>
+      <td>44</td>
+      <td>7</td>
+      <td>551</td>
+    </tr>
+    <tr>
+      <th>20 or more</th>
+      <td>1057</td>
+      <td>6</td>
+      <td>262</td>
+      <td>123</td>
+      <td>20</td>
+      <td>3</td>
+      <td>208</td>
+    </tr>
+    <tr>
+      <th>30 or more</th>
+      <td>557</td>
+      <td>1</td>
+      <td>118</td>
+      <td>53</td>
+      <td>10</td>
+      <td>2</td>
+      <td>107</td>
+    </tr>
+  </tbody>
+</table><img src="d4.png"><img src="d3.png">
+    <p>Percentage of students</p><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>RaceEthnicity</th>
+      <th>African American</th>
+      <th>Asian</th>
+      <th>Hispanic</th>
+      <th>Multi Racial</th>
+      <th>Native American</th>
+      <th>Pacific Islander</th>
+      <th>White</th>
+    </tr>
+    <tr>
+      <th>referral_count</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>02 or more</th>
+      <td>39.45</td>
+      <td>6.23</td>
+      <td>14.67</td>
+      <td>27.34</td>
+      <td>31.08</td>
+      <td>17.72</td>
+      <td>15.33</td>
+    </tr>
+    <tr>
+      <th>05 or more</th>
+      <td>25.24</td>
+      <td>2.25</td>
+      <td>7.34</td>
+      <td>16.70</td>
+      <td>17.12</td>
+      <td>10.13</td>
+      <td>7.63</td>
+    </tr>
+    <tr>
+      <th>10 or more</th>
+      <td>15.66</td>
+      <td>0.88</td>
+      <td>3.67</td>
+      <td>9.90</td>
+      <td>9.91</td>
+      <td>8.86</td>
+      <td>3.93</td>
+    </tr>
+    <tr>
+      <th>20 or more</th>
+      <td>8.05</td>
+      <td>0.18</td>
+      <td>1.36</td>
+      <td>4.29</td>
+      <td>4.50</td>
+      <td>3.80</td>
+      <td>1.48</td>
+    </tr>
+    <tr>
+      <th>30 or more</th>
+      <td>4.24</td>
+      <td>0.03</td>
+      <td>0.61</td>
+      <td>1.85</td>
+      <td>2.25</td>
+      <td>2.53</td>
+      <td>0.76</td>
+    </tr>
+  </tbody>
+</table><img src="d5.png">
+    <h3>Pre-K through 3</h3>
+    <p><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>RaceEthnicity</th>
+      <th>students</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>African American</td>
+      <td>4089</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>1348</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>6186</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>1142</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>133</td>
+    </tr>
+    <tr>
+      <td>Pacific Islander</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>4876</td>
+    </tr>
+  </tbody>
+</table></p><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>RaceEthnicity</th>
+      <th>African American</th>
+      <th>Asian</th>
+      <th>Hispanic</th>
+      <th>Multi Racial</th>
+      <th>Native American</th>
+      <th>Pacific Islander</th>
+      <th>White</th>
+    </tr>
+    <tr>
+      <th>referral_count</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>02 or more</th>
+      <td>959</td>
+      <td>37</td>
+      <td>251</td>
+      <td>200</td>
+      <td>15</td>
+      <td>1</td>
+      <td>478</td>
+    </tr>
+    <tr>
+      <th>05 or more</th>
+      <td>535</td>
+      <td>12</td>
+      <td>108</td>
+      <td>111</td>
+      <td>6</td>
+      <td>1</td>
+      <td>231</td>
+    </tr>
+    <tr>
+      <th>10 or more</th>
+      <td>302</td>
+      <td>5</td>
+      <td>57</td>
+      <td>55</td>
+      <td>4</td>
+      <td>1</td>
+      <td>116</td>
+    </tr>
+    <tr>
+      <th>20 or more</th>
+      <td>145</td>
+      <td>&lt;NA&gt;</td>
+      <td>26</td>
+      <td>25</td>
+      <td>2</td>
+      <td>&lt;NA&gt;</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <th>30 or more</th>
+      <td>82</td>
+      <td>&lt;NA&gt;</td>
+      <td>12</td>
+      <td>12</td>
+      <td>1</td>
+      <td>&lt;NA&gt;</td>
+      <td>31</td>
+    </tr>
+  </tbody>
+</table><img src="d11.png">
+    <p>Percentage of students</p><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>RaceEthnicity</th>
+      <th>African American</th>
+      <th>Asian</th>
+      <th>Hispanic</th>
+      <th>Multi Racial</th>
+      <th>Native American</th>
+      <th>Pacific Islander</th>
+      <th>White</th>
+    </tr>
+    <tr>
+      <th>referral_count</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>02 or more</th>
+      <td>23.45</td>
+      <td>2.74</td>
+      <td>4.06</td>
+      <td>17.51</td>
+      <td>11.28</td>
+      <td>3.7</td>
+      <td>9.80</td>
+    </tr>
+    <tr>
+      <th>05 or more</th>
+      <td>13.08</td>
+      <td>0.89</td>
+      <td>1.75</td>
+      <td>9.72</td>
+      <td>4.51</td>
+      <td>3.7</td>
+      <td>4.74</td>
+    </tr>
+    <tr>
+      <th>10 or more</th>
+      <td>7.39</td>
+      <td>0.37</td>
+      <td>0.92</td>
+      <td>4.82</td>
+      <td>3.01</td>
+      <td>3.7</td>
+      <td>2.38</td>
+    </tr>
+    <tr>
+      <th>20 or more</th>
+      <td>3.55</td>
+      <td>NaN</td>
+      <td>0.42</td>
+      <td>2.19</td>
+      <td>1.50</td>
+      <td>NaN</td>
+      <td>1.05</td>
+    </tr>
+    <tr>
+      <th>30 or more</th>
+      <td>2.01</td>
+      <td>NaN</td>
+      <td>0.19</td>
+      <td>1.05</td>
+      <td>0.75</td>
+      <td>NaN</td>
+      <td>0.64</td>
+    </tr>
+  </tbody>
+</table><img src="d12.png">
+    <h3>Grades 4 through 6</h3>
+    <p><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>RaceEthnicity</th>
+      <th>students</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>African American</td>
+      <td>2978</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>731</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>4372</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>680</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>85</td>
+    </tr>
+    <tr>
+      <td>Pacific Islander</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>3101</td>
+    </tr>
+  </tbody>
+</table></p><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>RaceEthnicity</th>
+      <th>African American</th>
+      <th>Asian</th>
+      <th>Hispanic</th>
+      <th>Multi Racial</th>
+      <th>Native American</th>
+      <th>Pacific Islander</th>
+      <th>White</th>
+    </tr>
+    <tr>
+      <th>referral_count</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>02 or more</th>
+      <td>1312</td>
+      <td>49</td>
+      <td>478</td>
+      <td>200</td>
+      <td>22</td>
+      <td>6</td>
+      <td>494</td>
+    </tr>
+    <tr>
+      <th>05 or more</th>
+      <td>840</td>
+      <td>14</td>
+      <td>220</td>
+      <td>122</td>
+      <td>13</td>
+      <td>4</td>
+      <td>235</td>
+    </tr>
+    <tr>
+      <th>10 or more</th>
+      <td>524</td>
+      <td>7</td>
+      <td>103</td>
+      <td>77</td>
+      <td>7</td>
+      <td>4</td>
+      <td>126</td>
+    </tr>
+    <tr>
+      <th>20 or more</th>
+      <td>274</td>
+      <td>3</td>
+      <td>43</td>
+      <td>34</td>
+      <td>5</td>
+      <td>2</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>30 or more</th>
+      <td>167</td>
+      <td>&lt;NA&gt;</td>
+      <td>25</td>
+      <td>17</td>
+      <td>3</td>
+      <td>2</td>
+      <td>23</td>
+    </tr>
+  </tbody>
+</table><img src="d21.png">
+    <p>Percentage of students</p><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>RaceEthnicity</th>
+      <th>African American</th>
+      <th>Asian</th>
+      <th>Hispanic</th>
+      <th>Multi Racial</th>
+      <th>Native American</th>
+      <th>Pacific Islander</th>
+      <th>White</th>
+    </tr>
+    <tr>
+      <th>referral_count</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>02 or more</th>
+      <td>44.06</td>
+      <td>6.70</td>
+      <td>10.93</td>
+      <td>29.41</td>
+      <td>25.88</td>
+      <td>46.15</td>
+      <td>15.93</td>
+    </tr>
+    <tr>
+      <th>05 or more</th>
+      <td>28.21</td>
+      <td>1.92</td>
+      <td>5.03</td>
+      <td>17.94</td>
+      <td>15.29</td>
+      <td>30.77</td>
+      <td>7.58</td>
+    </tr>
+    <tr>
+      <th>10 or more</th>
+      <td>17.60</td>
+      <td>0.96</td>
+      <td>2.36</td>
+      <td>11.32</td>
+      <td>8.24</td>
+      <td>30.77</td>
+      <td>4.06</td>
+    </tr>
+    <tr>
+      <th>20 or more</th>
+      <td>9.20</td>
+      <td>0.41</td>
+      <td>0.98</td>
+      <td>5.00</td>
+      <td>5.88</td>
+      <td>15.38</td>
+      <td>1.23</td>
+    </tr>
+    <tr>
+      <th>30 or more</th>
+      <td>5.61</td>
+      <td>NaN</td>
+      <td>0.57</td>
+      <td>2.50</td>
+      <td>3.53</td>
+      <td>15.38</td>
+      <td>0.74</td>
+    </tr>
+  </tbody>
+</table><img src="d22.png">
+    <h2>Reasons for Referrals</h2>
+    <h3>Pre-K through 3</h3><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>eventName</th>
+      <th>count(*)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Classroom Disruption/Behavior Disruptive to the School Environment</td>
+      <td>7671</td>
+    </tr>
+    <tr>
+      <td>Insubordination/Non-compliance with behavioral expectations</td>
+      <td>2225</td>
+    </tr>
+    <tr>
+      <td>Disrespectful to Adults/Others</td>
+      <td>2215</td>
+    </tr>
+    <tr>
+      <td>Reckless Behavior</td>
+      <td>1529</td>
+    </tr>
+    <tr>
+      <td>Assault, No Injury</td>
+      <td>1174</td>
+    </tr>
+    <tr>
+      <td>Fighting, Less Serious</td>
+      <td>747</td>
+    </tr>
+    <tr>
+      <td>Assault to Staff</td>
+      <td>409</td>
+    </tr>
+    <tr>
+      <td>Violation of other Defined School Rules</td>
+      <td>399</td>
+    </tr>
+    <tr>
+      <td>No Behavior Event/Documentation</td>
+      <td>386</td>
+    </tr>
+    <tr>
+      <td>Repeated Violations</td>
+      <td>355</td>
+    </tr>
+  </tbody>
+</table>
+    <p><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>raceEthnicity</th>
+      <th>eventName</th>
+      <th>occurrences</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>African American</td>
+      <td>Classroom Disruption/Behavior Disruptive to the School Environment</td>
+      <td>4140</td>
+    </tr>
+    <tr>
+      <td>African American</td>
+      <td>Insubordination/Non-compliance with behavioral expectations</td>
+      <td>1200</td>
+    </tr>
+    <tr>
+      <td>African American</td>
+      <td>Disrespectful to Adults/Others</td>
+      <td>1167</td>
+    </tr>
+    <tr>
+      <td>African American</td>
+      <td>Reckless Behavior</td>
+      <td>859</td>
+    </tr>
+    <tr>
+      <td>African American</td>
+      <td>Assault, No Injury</td>
+      <td>608</td>
+    </tr>
+    <tr>
+      <td>African American</td>
+      <td>Fighting, Less Serious</td>
+      <td>436</td>
+    </tr>
+    <tr>
+      <td>African American</td>
+      <td>Violation of other Defined School Rules</td>
+      <td>243</td>
+    </tr>
+    <tr>
+      <td>African American</td>
+      <td>Repeated Violations</td>
+      <td>191</td>
+    </tr>
+    <tr>
+      <td>African American</td>
+      <td>Assault to Staff</td>
+      <td>188</td>
+    </tr>
+    <tr>
+      <td>African American</td>
+      <td>Assault with Injury (Intentional)</td>
+      <td>153</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>Classroom Disruption/Behavior Disruptive to the School Environment</td>
+      <td>75</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>Disrespectful to Adults/Others</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>Assault, No Injury</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>No Behavior Event/Documentation</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>Reckless Behavior</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>Bus Misconduct</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>Insubordination/Non-compliance with behavioral expectations</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>Fighting, Less Serious</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>Inappropriate Language</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>Violation of other Defined School Rules</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>Classroom Disruption/Behavior Disruptive to the School Environment</td>
+      <td>827</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>Insubordination/Non-compliance with behavioral expectations</td>
+      <td>289</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>Disrespectful to Adults/Others</td>
+      <td>261</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>Reckless Behavior</td>
+      <td>176</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>Assault, No Injury</td>
+      <td>127</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>Fighting, Less Serious</td>
+      <td>82</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>No Behavior Event/Documentation</td>
+      <td>79</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>Bus Misconduct</td>
+      <td>62</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>Inappropriate Language</td>
+      <td>53</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>Assault to Staff</td>
+      <td>47</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>Classroom Disruption/Behavior Disruptive to the School Environment</td>
+      <td>792</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>Insubordination/Non-compliance with behavioral expectations</td>
+      <td>244</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>Disrespectful to Adults/Others</td>
+      <td>194</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>Reckless Behavior</td>
+      <td>122</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>Assault, No Injury</td>
+      <td>99</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>Fighting, Less Serious</td>
+      <td>68</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>Assault to Staff</td>
+      <td>63</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>No Behavior Event/Documentation</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>Violation of other Defined School Rules</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>Damage to School, Staff, or Student Property</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>Classroom Disruption/Behavior Disruptive to the School Environment</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>Insubordination/Non-compliance with behavioral expectations</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>Disrespectful to Adults/Others</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>Reckless Behavior</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>Fighting, Less Serious</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>Damage to School, Staff, or Student Property</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>Engaging in Verbal Conflict</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>Assault, No Injury</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>Bullying</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>No Behavior Event/Documentation</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Pacific Islander</td>
+      <td>Classroom Disruption/Behavior Disruptive to the School Environment</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>Pacific Islander</td>
+      <td>Insubordination/Non-compliance with behavioral expectations</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Pacific Islander</td>
+      <td>Bullying</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>Classroom Disruption/Behavior Disruptive to the School Environment</td>
+      <td>1767</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>Disrespectful to Adults/Others</td>
+      <td>543</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>Insubordination/Non-compliance with behavioral expectations</td>
+      <td>456</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>Reckless Behavior</td>
+      <td>341</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>Assault, No Injury</td>
+      <td>315</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>No Behavior Event/Documentation</td>
+      <td>149</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>Fighting, Less Serious</td>
+      <td>141</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>Assault to Staff</td>
+      <td>110</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>Repeated Violations</td>
+      <td>105</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>Assault with Injury (Intentional)</td>
+      <td>84</td>
+    </tr>
+  </tbody>
+</table></p>
+    <h3>Grades 4 through 6</h3><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>eventName</th>
+      <th>count(*)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Classroom Disruption/Behavior Disruptive to the School Environment</td>
+      <td>7600</td>
+    </tr>
+    <tr>
+      <td>Insubordination/Non-compliance with behavioral expectations</td>
+      <td>3543</td>
+    </tr>
+    <tr>
+      <td>Disrespectful to Adults/Others</td>
+      <td>3479</td>
+    </tr>
+    <tr>
+      <td>No Behavior Event/Documentation</td>
+      <td>2753</td>
+    </tr>
+    <tr>
+      <td>Excessive Tardies/Hall Sweep</td>
+      <td>1570</td>
+    </tr>
+    <tr>
+      <td>Reckless Behavior</td>
+      <td>1511</td>
+    </tr>
+    <tr>
+      <td>Fighting, Less Serious</td>
+      <td>1275</td>
+    </tr>
+    <tr>
+      <td>Assault, No Injury</td>
+      <td>674</td>
+    </tr>
+    <tr>
+      <td>Misuse of Pass/Out of Area</td>
+      <td>591</td>
+    </tr>
+    <tr>
+      <td>Inappropriate Language</td>
+      <td>591</td>
+    </tr>
+  </tbody>
+</table>
+    <p><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>raceEthnicity</th>
+      <th>eventName</th>
+      <th>occurrences</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>African American</td>
+      <td>Classroom Disruption/Behavior Disruptive to the School Environment</td>
+      <td>4764</td>
+    </tr>
+    <tr>
+      <td>African American</td>
+      <td>Disrespectful to Adults/Others</td>
+      <td>2136</td>
+    </tr>
+    <tr>
+      <td>African American</td>
+      <td>Insubordination/Non-compliance with behavioral expectations</td>
+      <td>2126</td>
+    </tr>
+    <tr>
+      <td>African American</td>
+      <td>No Behavior Event/Documentation</td>
+      <td>1766</td>
+    </tr>
+    <tr>
+      <td>African American</td>
+      <td>Excessive Tardies/Hall Sweep</td>
+      <td>935</td>
+    </tr>
+    <tr>
+      <td>African American</td>
+      <td>Reckless Behavior</td>
+      <td>919</td>
+    </tr>
+    <tr>
+      <td>African American</td>
+      <td>Fighting, Less Serious</td>
+      <td>741</td>
+    </tr>
+    <tr>
+      <td>African American</td>
+      <td>Engaging in Verbal Conflict</td>
+      <td>429</td>
+    </tr>
+    <tr>
+      <td>African American</td>
+      <td>Assault, No Injury</td>
+      <td>393</td>
+    </tr>
+    <tr>
+      <td>African American</td>
+      <td>Misuse of Pass/Out of Area</td>
+      <td>368</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>Classroom Disruption/Behavior Disruptive to the School Environment</td>
+      <td>67</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>Insubordination/Non-compliance with behavioral expectations</td>
+      <td>44</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>Excessive Tardies/Hall Sweep</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>Disrespectful to Adults/Others</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>Reckless Behavior</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>Assault, No Injury</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>Fighting, Less Serious</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>Inappropriate Language</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>No Behavior Event/Documentation</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>Asian</td>
+      <td>Violation of other Defined School Rules</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>Classroom Disruption/Behavior Disruptive to the School Environment</td>
+      <td>1041</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>Disrespectful to Adults/Others</td>
+      <td>524</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>Insubordination/Non-compliance with behavioral expectations</td>
+      <td>460</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>No Behavior Event/Documentation</td>
+      <td>382</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>Excessive Tardies/Hall Sweep</td>
+      <td>228</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>Reckless Behavior</td>
+      <td>223</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>Fighting, Less Serious</td>
+      <td>217</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>Inappropriate Language</td>
+      <td>129</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>Assault, No Injury</td>
+      <td>84</td>
+    </tr>
+    <tr>
+      <td>Hispanic</td>
+      <td>Threats or Intimidation</td>
+      <td>77</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>Classroom Disruption/Behavior Disruptive to the School Environment</td>
+      <td>599</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>Insubordination/Non-compliance with behavioral expectations</td>
+      <td>304</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>Disrespectful to Adults/Others</td>
+      <td>268</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>No Behavior Event/Documentation</td>
+      <td>211</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>Excessive Tardies/Hall Sweep</td>
+      <td>151</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>Reckless Behavior</td>
+      <td>115</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>Fighting, Less Serious</td>
+      <td>111</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>Violation of other Defined School Rules</td>
+      <td>72</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>Misuse of Pass/Out of Area</td>
+      <td>67</td>
+    </tr>
+    <tr>
+      <td>Multi Racial</td>
+      <td>Assault, No Injury</td>
+      <td>51</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>Classroom Disruption/Behavior Disruptive to the School Environment</td>
+      <td>73</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>Insubordination/Non-compliance with behavioral expectations</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>No Behavior Event/Documentation</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>Fighting, Less Serious</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>Disrespectful to Adults/Others</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>Excessive Tardies/Hall Sweep</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>Violation of other Defined School Rules</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>Misuse of Pass/Out of Area</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>Damage to School, Staff, or Student Property</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>Native American</td>
+      <td>Threats or Intimidation</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Pacific Islander</td>
+      <td>Classroom Disruption/Behavior Disruptive to the School Environment</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <td>Pacific Islander</td>
+      <td>No Behavior Event/Documentation</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>Pacific Islander</td>
+      <td>Disrespectful to Adults/Others</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <td>Pacific Islander</td>
+      <td>Insubordination/Non-compliance with behavioral expectations</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>Pacific Islander</td>
+      <td>Truancy</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>Pacific Islander</td>
+      <td>Reckless Behavior</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>Pacific Islander</td>
+      <td>Fighting, Serious</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>Pacific Islander</td>
+      <td>Misuse of Pass/Out of Area</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>Pacific Islander</td>
+      <td>Assault, No Injury</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>Pacific Islander</td>
+      <td>Excessive Tardies/Hall Sweep</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>Classroom Disruption/Behavior Disruptive to the School Environment</td>
+      <td>1033</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>Insubordination/Non-compliance with behavioral expectations</td>
+      <td>570</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>Disrespectful to Adults/Others</td>
+      <td>496</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>No Behavior Event/Documentation</td>
+      <td>347</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>Reckless Behavior</td>
+      <td>226</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>Excessive Tardies/Hall Sweep</td>
+      <td>208</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>Fighting, Less Serious</td>
+      <td>172</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>Violation of other Defined School Rules</td>
+      <td>131</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>Assault, No Injury</td>
+      <td>126</td>
+    </tr>
+    <tr>
+      <td>White</td>
+      <td>Inappropriate Language</td>
+      <td>102</td>
+    </tr>
+  </tbody>
+</table></p>
+  </body>
+</html>
