@@ -113,8 +113,27 @@ plt.clf()
 # -------------- Pre-K through 3 -------------------
 
 sqlstr = """
-  SELECT raceEthnicity, sum(students) students
-  FROM membership
+  WITH referrals AS (
+    SELECT RaceEthnicity, count(*) total_referrals
+    FROM disc
+    WHERE grade IN ('PK', 'KG', 1, 2, 3)
+    GROUP BY 1
+  ),
+  repeat_referrals AS (
+    SELECT RaceEthnicity, count(*) unique_students
+    FROM disc
+    WHERE grade IN ('PK', 'KG', 1, 2, 3)
+    GROUP BY "w"
+  ),
+  unique_repeat_referrals AS (
+    SELECT RaceEthnicity, count(unique_students) one_or_more
+    FROM repeat_referrals
+    GROUP BY 1
+  )
+  SELECT m.raceEthnicity, sum(students) students, r.total_referrals, urr.one_or_more
+  FROM membership m
+  JOIN referrals r ON (r.RaceEthnicity = m.RaceEthnicity)
+  JOIN unique_repeat_referrals urr ON (urr.RaceEthnicity = m.RaceEthnicity)
   WHERE grade IN ('PK', 'KG', 1, 2, 3)
   GROUP BY 1;
 """
@@ -161,8 +180,27 @@ plt.clf()
 # -------------- Grades 4,5,6 -------------------
 
 sqlstr = """
-  SELECT raceEthnicity, sum(students) students
-  FROM membership
+  WITH referrals AS (
+    SELECT RaceEthnicity, count(*) total_referrals
+    FROM disc
+    WHERE grade IN (4, 5, 6)
+    GROUP BY 1
+  ),
+  repeat_referrals AS (
+    SELECT RaceEthnicity, count(*) unique_students
+    FROM disc
+    WHERE grade IN (4, 5, 6)
+    GROUP BY "w"
+  ),
+  unique_repeat_referrals AS (
+    SELECT RaceEthnicity, count(unique_students) one_or_more
+    FROM repeat_referrals
+    GROUP BY 1
+  )
+  SELECT m.raceEthnicity, sum(students) students, r.total_referrals, urr.one_or_more
+  FROM membership m
+  JOIN referrals r ON (r.RaceEthnicity = m.RaceEthnicity)
+  JOIN unique_repeat_referrals urr ON (urr.RaceEthnicity = m.RaceEthnicity)
   WHERE grade IN (4, 5, 6)
   GROUP BY 1;
 """
