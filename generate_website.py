@@ -309,7 +309,7 @@ sqlstr = """
 SELECT resolutionName, count(*)
 FROM disc
 WHERE Grade IN ('PK', 'KG', 1, 2, 3)
-AND resolutionName like '%referral%'
+AND resolutionName like '%refer%'
 COLLATE NOCASE
 GROUP BY 1;
 """
@@ -320,15 +320,16 @@ sqlstr = """
 SELECT resolutionName, raceEthnicity, count(*) count
 FROM disc
 WHERE Grade IN ('PK', 'KG', 1, 2, 3)
-AND resolutionName like '%referral%'
+AND resolutionName like '%refer%'
 COLLATE NOCASE
 GROUP BY 1, 2;
 """
 df204 = pd.read_sql_query(sqlstr, con)
 print(df204.head())
 df204 = df204.pivot_table(index='resolutionName', columns='RaceEthnicity', values='count')
-# for r in raceEthnicity:
-#   df204[r] = df204[r].astype('Int64')  # capital I
+for r in raceEthnicity:
+  if r == "Pacific Islander":
+    df204.insert(5, "Pacific Islander", [np.nan] * 10)  # short version of [np.nan, np.nan, np.nan, ...]
 
 sqlstr = """
   SELECT rc.category, count(*)
@@ -379,7 +380,7 @@ sqlstr = """
 SELECT resolutionName, count(*)
 FROM disc
 WHERE Grade IN (4, 5, 6)
-AND resolutionName like '%referral%'
+AND resolutionName like '%refer%'
 COLLATE NOCASE
 GROUP BY 1;
 """
@@ -390,16 +391,14 @@ sqlstr = """
 SELECT resolutionName, raceEthnicity, count(*) count
 FROM disc
 WHERE Grade IN (4, 5, 6)
-AND resolutionName like '%referral%'
+AND resolutionName like '%refer%'
 COLLATE NOCASE
 GROUP BY 1, 2;
 """
 df214 = pd.read_sql_query(sqlstr, con)
 print(df214.head())
 df214 = df214.pivot_table(index='resolutionName', columns='RaceEthnicity', values='count')
-print("JAY1:", type(df214.at["Referral to Community Agency", "Asian"]))  # NaN is <class 'numpy.float64'>
-# for r in raceEthnicity:
-#   df204[r] = df204[r].astype('Int64')  # capital I
+# print("JAY1:", type(df214.at["Referral to Community Agency", "Asian"]))  # NaN is <class 'numpy.float64'>
 
 # ======== PARENT ENGAGEMENT ============
 
@@ -539,7 +538,7 @@ plt.savefig('d403.png', bbox_inches='tight')
 plt.clf()
 
 
-make_zero_empty = lambda x: ""
+make_zero_empty = lambda x: '{0:.0f}'.format(x) if x >= 1 else ''
 
 with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019') as doc:
   h1('Omaha Public Schools 2018-2019')
@@ -631,7 +630,8 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   p(raw(df201.to_html()))
   raw('<img src="d202.png">')
   p(raw(df203.to_html(index=False)))
-  raw(df204.to_html())
+  # raw(df204.to_html(na_rep=""))
+  raw(df204.to_html(na_rep="", float_format=make_zero_empty))
 
   div(id='resolutions-4')
   h3('Grades 4 through 6')
@@ -639,8 +639,8 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   p(raw(df211.to_html()))
   raw('<img src="d212.png">')
   p(raw(df213.to_html(index=False)))
-  raw(df214.to_html())
-
+  raw(df214.to_html(na_rep="", float_format=make_zero_empty))
+  
   div(id='parent')
   h2('Parent Engagement')
   div(id='parent-prek')
@@ -656,7 +656,7 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   div(id='suspension')
   h2('Suspension, Expulsion, Exclusion')
   p('Count of referrals:')
-  raw(df400.to_html(na_rep="", formatters={0: make_zero_empty}))
+  raw(df400.to_html(float_format=make_zero_empty))
   p('Percentage of referrals:')
   p(raw(df401.to_html(na_rep="")))
   p('Student count:')
