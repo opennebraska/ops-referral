@@ -130,9 +130,6 @@ sqlstr = """
 df11 = pd.read_sql_query(sqlstr, con)
 df11 = df11.pivot_table(index='referral_count', columns='RaceEthnicity', values='students')
 print(df11.head())
-# Change to Pandas int to get rid of all the ".0"s
-for r in raceEthnicity:
-  df11[r] = df11[r].astype('Int64')  # capital I
 sns_plot = sns.lineplot(data=df11)
 sns_plot.set_xlabel("Referral Count")
 sns_plot.set_ylabel("Students")
@@ -180,10 +177,6 @@ sqlstr = """
 """
 df21 = pd.read_sql_query(sqlstr, con)
 df21 = df21.pivot_table(index='referral_count', columns='RaceEthnicity', values='students')
-# Change to Pandas int to get rid of all the ".0"s
-for r in raceEthnicity:
-  df21[r] = df21[r].astype('Int64')  # capital I
-print(df21.head())
 sns_plot = sns.lineplot(data=df21)
 sns_plot.set_xlabel("Referral Count")
 sns_plot.set_ylabel("Students")
@@ -468,14 +461,7 @@ GROUP BY 1, 2
 """
 df400 = pd.read_sql_query(sqlstr, con)
 df400 = df400.pivot_table(index='resolutionName', columns='RaceEthnicity', values='count')
-# ... no idea why <numpy.float64> is sometimes NaN (which disappears nicely in to_html() below,
-# but sometimes it's <NA> which refuses to disappear in to_html() below.
 print("JAY2:", type(df400.at["Emergency Exclusion", "Asian"]))  # <NA> is <class 'numpy.float64'>
-# ... uhh... this accomplishes nothing
-# df400 = df400.replace({np.nan: pd.NA})
-for r in raceEthnicity:
-  df400[r] = df400[r].astype('Int64')  # capital I
-df400 = df400.replace({np.nan: 0})
 print(df400.head())
 
 sqlstr = """
@@ -508,8 +494,6 @@ sqlstr = """
 """
 df402 = pd.read_sql_query(sqlstr, con)
 df402 = df402.pivot_table(index='referral_count', columns='RaceEthnicity', values='students')
-for r in raceEthnicity:
-  df402[r] = df402[r].astype('Int64')  # capital I
 print(df402.head())
 sns_plot = sns.lineplot(data=df402)
 sns_plot.set_xlabel("Referral Count")
@@ -538,7 +522,8 @@ plt.savefig('d403.png', bbox_inches='tight')
 plt.clf()
 
 
-make_zero_empty = lambda x: '{0:.0f}'.format(x) if x >= 1 else ''
+make_zero_empty = lambda x: '{0:.0f}'.format(x) if x > 0 else ''
+make_zero_empty_two_digits = lambda x: '{0:.2f}'.format(x) if x > 0 else ''
 
 with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019') as doc:
   h1('Omaha Public Schools 2018-2019')
@@ -596,19 +581,19 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   div(id='overall-prek')
   h3('Pre-K through 3')
   p(raw(df10.to_html(index=False)))
-  raw(df11.to_html())
+  raw(df11.to_html(na_rep='', float_format=make_zero_empty))
   raw('<img src="d11.png">')
   p('Percentage of students')
-  raw(df12.to_html())
+  raw(df12.to_html(na_rep='', float_format=make_zero_empty_two_digits))
   raw('<img src="d12.png">')
 
   div(id='overall-4')
   h3('Grades 4 through 6')
   p(raw(df20.to_html(index=False)))
-  raw(df21.to_html())
+  raw(df21.to_html(na_rep='', float_format=make_zero_empty))
   raw('<img src="d21.png">')
   p('Percentage of students')
-  raw(df22.to_html())
+  raw(df22.to_html(na_rep='', float_format=make_zero_empty_two_digits))
   raw('<img src="d22.png">')
 
   div(id='reasons')
@@ -640,30 +625,30 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   raw('<img src="d212.png">')
   p(raw(df213.to_html(index=False)))
   raw(df214.to_html(na_rep="", float_format=make_zero_empty))
-  
+
   div(id='parent')
   h2('Parent Engagement')
   div(id='parent-prek')
   h3('Pre-K through 3')
-  raw(df300.to_html(index=False))
-  p(raw(df301.to_html()))
+  raw(df300.to_html(na_rep='', index=False))
+  p(raw(df301.to_html(na_rep='')))
 
   div(id='parent-4')
   h3('Grades 4 through 6')
-  raw(df310.to_html(index=False))
-  p(raw(df311.to_html()))
+  raw(df310.to_html(na_rep='', index=False))
+  p(raw(df311.to_html(na_rep='')))
 
   div(id='suspension')
   h2('Suspension, Expulsion, Exclusion')
   p('Count of referrals:')
-  raw(df400.to_html(float_format=make_zero_empty))
+  raw(df400.to_html(na_rep='', float_format=make_zero_empty))
   p('Percentage of referrals:')
-  p(raw(df401.to_html(na_rep="")))
+  p(raw(df401.to_html(na_rep='', float_format=make_zero_empty_two_digits)))
   p('Student count:')
-  p(raw(df402.to_html()))
+  raw(df402.to_html(na_rep='', float_format=make_zero_empty))
   raw('<img src="d402.png">')
   p('Percentage of students:')
-  p(raw(df403.to_html()))
+  p(raw(df403.to_html(na_rep='', float_format=make_zero_empty_two_digits)))
   raw('<img src="d403.png">')
 
   # for path in photos:
