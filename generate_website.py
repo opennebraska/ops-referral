@@ -545,10 +545,44 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   h1('Omaha Public Schools 2018-2019')
   raw('Referral (disciplinary) data analysis. <a href="https://github.com/opennebraska/ops-referral">[Source code]</a>')
 
+  # uhh... can't get this working...
+  # with doc.add(ul()):
+  #   for h2 in ['Students', 'Overall Discipline Picture', 'Reasons for Referrals', 'Resolutions', 'Parent Engagement', 'Suspension, Expulsion, Exclusion']:
+  #     li(h2)
+  # do we'll do it raw
+  raw("""
+    <ul>
+      <li><a href="#students"   >Students</a></li>
+      <li><a href="#overall"    >Overall Discipline Picture</a></li>
+      <ul>
+        <li><a href="#overall-prek">Pre-K through 3</a></li>
+        <li><a href="#overall-4"   >Grades 4 through 6</a></li>
+      </ul>
+      <li><a href="#reasons"    >Reasons for Referrals</a></li>
+      <ul>
+        <li><a href="#reasons-prek">Pre-K through 3</a></li>
+        <li><a href="#reasons-4"   >Grades 4 through 6</a></li>
+      </ul>
+      <li><a href="#resolutions">Resolutions</a></li>
+      <ul>
+        <li><a href="#resolutions-prek">Pre-K through 3</a></li>
+        <li><a href="#resolutions-4"   >Grades 4 through 6</a></li>
+      </ul>
+      <li><a href="#parent"     >Parent Engagement</a></li>
+      <ul>
+        <li><a href="#parent-prek">Pre-K through 3</a></li>
+        <li><a href="#parent-4"   >Grades 4 through 6</a></li>
+      </ul>
+      <li><a href="#suspension" >Suspension</a></li>
+    </ul>
+  """)
+
+  div(id='students')
   h2('Students')
   raw(df1.to_html(index=False))
   raw('<img src="d1.png">')
 
+  div(id='overall')
   h2('Overall Discipline Picture')
   raw(df2.to_html(index=False))
   raw('<img src="d2.png">')
@@ -560,6 +594,7 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   raw(df5.to_html())
   raw('<img src="d5.png">')
 
+  div(id='overall-prek')
   h3('Pre-K through 3')
   p(raw(df10.to_html(index=False)))
   raw(df11.to_html())
@@ -568,6 +603,7 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   raw(df12.to_html())
   raw('<img src="d12.png">')
 
+  div(id='overall-4')
   h3('Grades 4 through 6')
   p(raw(df20.to_html(index=False)))
   raw(df21.to_html())
@@ -576,15 +612,20 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   raw(df22.to_html())
   raw('<img src="d22.png">')
 
+  div(id='reasons')
   h2('Reasons for Referrals')
+  div(id='reasons-prek')
   h3('Pre-K through 3')
   raw(df100.to_html(index=False))
   p(raw(df101.to_html(index=False)))
+  div(id='reasons-4')
   h3('Grades 4 through 6')
   raw(df110.to_html(index=False))
   p(raw(df111.to_html(index=False)))
 
+  div(id='resolutions')
   h2('Resolutions')
+  div(id='resolutions-prek')
   h3('Pre-K through 3')
   raw(df200.to_html(index=False))
   p(raw(df201.to_html()))
@@ -592,6 +633,7 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   p(raw(df203.to_html(index=False)))
   raw(df204.to_html())
 
+  div(id='resolutions-4')
   h3('Grades 4 through 6')
   raw(df210.to_html(index=False))
   p(raw(df211.to_html()))
@@ -599,15 +641,19 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   p(raw(df213.to_html(index=False)))
   raw(df214.to_html())
 
+  div(id='parent')
   h2('Parent Engagement')
+  div(id='parent-prek')
   h3('Pre-K through 3')
   raw(df300.to_html(index=False))
   p(raw(df301.to_html()))
 
+  div(id='parent-4')
   h3('Grades 4 through 6')
   raw(df310.to_html(index=False))
   p(raw(df311.to_html()))
 
+  div(id='suspension')
   h2('Suspension, Expulsion, Exclusion')
   p('Count of referrals:')
   raw(df400.to_html(na_rep="", formatters={0: make_zero_empty}))
