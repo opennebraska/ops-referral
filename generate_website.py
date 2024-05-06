@@ -114,6 +114,31 @@ plt.clf()
 
 sqlstr = """
   WITH referrals AS (
+    SELECT count(*) total_referrals
+    FROM disc
+    WHERE grade IN ('PK', 'KG', 1, 2, 3)
+  ),
+  repeat_referrals AS (
+    SELECT count(*) unique_students
+    FROM disc
+    WHERE grade IN ('PK', 'KG', 1, 2, 3)
+    GROUP BY "w"
+  ),
+  unique_repeat_referrals AS (
+    SELECT count(unique_students) one_or_more
+    FROM repeat_referrals
+  )
+  SELECT sum(students) students, r.total_referrals, urr.one_or_more
+  FROM membership m
+  JOIN referrals r
+  JOIN unique_repeat_referrals urr
+  WHERE grade IN ('PK', 'KG', 1, 2, 3)
+"""
+df10 = pd.read_sql_query(sqlstr, con)
+print(df10.head())
+
+sqlstr = """
+  WITH referrals AS (
     SELECT RaceEthnicity, count(*) total_referrals
     FROM disc
     WHERE grade IN ('PK', 'KG', 1, 2, 3)
@@ -137,8 +162,8 @@ sqlstr = """
   WHERE grade IN ('PK', 'KG', 1, 2, 3)
   GROUP BY 1;
 """
-df10 = pd.read_sql_query(sqlstr, con)
-print(df10.head())
+df11 = pd.read_sql_query(sqlstr, con)
+print(df11.head())
 
 sqlstr = """
   SELECT referral_count, RaceEthnicity, sum(students) students
@@ -146,13 +171,13 @@ sqlstr = """
   WHERE grade IN ('PK', 'KG', 1, 2, 3)
   GROUP BY 1, 2
 """
-df11 = pd.read_sql_query(sqlstr, con)
-df11 = df11.pivot_table(index='referral_count', columns='RaceEthnicity', values='students')
-print(df11.head())
-sns_plot = sns.lineplot(data=df11)
+df12 = pd.read_sql_query(sqlstr, con)
+df12 = df12.pivot_table(index='referral_count', columns='RaceEthnicity', values='students')
+print(df12.head())
+sns_plot = sns.lineplot(data=df12)
 sns_plot.set_xlabel("Referral Count")
 sns_plot.set_ylabel("Students")
-plt.savefig('d11.png', bbox_inches='tight')
+plt.savefig('d12.png', bbox_inches='tight')
 plt.clf()
 
 sqlstr = """
@@ -168,16 +193,41 @@ sqlstr = """
   WHERE grade IN ('PK', 'KG', 1, 2, 3)
   GROUP BY 1, 2
 """
-df12 = pd.read_sql_query(sqlstr, con)
-df12 = df12.pivot_table(index='referral_count', columns='RaceEthnicity', values='percent')
-print(df12.head())
-sns_plot = sns.lineplot(data=df12)
+df13 = pd.read_sql_query(sqlstr, con)
+df13 = df13.pivot_table(index='referral_count', columns='RaceEthnicity', values='percent')
+print(df13.head())
+sns_plot = sns.lineplot(data=df13)
 sns_plot.set_xlabel('Referral Count')
 sns_plot.set_ylabel("% of students")
-plt.savefig('d12.png', bbox_inches='tight')
+plt.savefig('d13.png', bbox_inches='tight')
 plt.clf()
 
 # -------------- Grades 4,5,6 -------------------
+
+sqlstr = """
+  WITH referrals AS (
+    SELECT count(*) total_referrals
+    FROM disc
+    WHERE grade IN (4, 5, 6)
+  ),
+  repeat_referrals AS (
+    SELECT count(*) unique_students
+    FROM disc
+    WHERE grade IN (4, 5, 6)
+    GROUP BY "w"
+  ),
+  unique_repeat_referrals AS (
+    SELECT count(unique_students) one_or_more
+    FROM repeat_referrals
+  )
+  SELECT sum(students) students, r.total_referrals, urr.one_or_more
+  FROM membership m
+  JOIN referrals r
+  JOIN unique_repeat_referrals urr
+  WHERE grade IN (4, 5, 6)
+"""
+df20 = pd.read_sql_query(sqlstr, con)
+print(df20.head())
 
 sqlstr = """
   WITH referrals AS (
@@ -204,8 +254,8 @@ sqlstr = """
   WHERE grade IN (4, 5, 6)
   GROUP BY 1;
 """
-df20 = pd.read_sql_query(sqlstr, con)
-print(df20.head())
+df21 = pd.read_sql_query(sqlstr, con)
+print(df21.head())
 
 sqlstr = """
   SELECT referral_count, RaceEthnicity, sum(students) students
@@ -213,12 +263,12 @@ sqlstr = """
   WHERE grade IN (4, 5, 6)
   GROUP BY 1, 2
 """
-df21 = pd.read_sql_query(sqlstr, con)
-df21 = df21.pivot_table(index='referral_count', columns='RaceEthnicity', values='students')
-sns_plot = sns.lineplot(data=df21)
+df22 = pd.read_sql_query(sqlstr, con)
+df22 = df22.pivot_table(index='referral_count', columns='RaceEthnicity', values='students')
+sns_plot = sns.lineplot(data=df22)
 sns_plot.set_xlabel("Referral Count")
 sns_plot.set_ylabel("Students")
-plt.savefig('d21.png', bbox_inches='tight')
+plt.savefig('d22.png', bbox_inches='tight')
 plt.clf()
 
 sqlstr = """
@@ -234,13 +284,13 @@ sqlstr = """
   WHERE grade IN (4, 5, 6)
   GROUP BY 1, 2
 """
-df22 = pd.read_sql_query(sqlstr, con)
-df22 = df22.pivot_table(index='referral_count', columns='RaceEthnicity', values='percent')
-print(df22.head())
-sns_plot = sns.lineplot(data=df22)
+df23 = pd.read_sql_query(sqlstr, con)
+df23 = df23.pivot_table(index='referral_count', columns='RaceEthnicity', values='percent')
+print(df23.head())
+sns_plot = sns.lineplot(data=df23)
 sns_plot.set_xlabel('Referral Count')
 sns_plot.set_ylabel("% of students")
-plt.savefig('d22.png', bbox_inches='tight')
+plt.savefig('d23.png', bbox_inches='tight')
 plt.clf()
 
 # ======== REASONS FOR REFERRALS ============
@@ -618,21 +668,23 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
 
   div(id='overall-prek')
   h3('Pre-K through 3')
-  p(raw(df10.to_html(index=False)))
-  raw(df11.to_html(na_rep='', float_format=make_zero_empty))
-  raw('<img src="d11.png">')
-  p('Percentage of students')
-  raw(df12.to_html(na_rep='', float_format=make_zero_empty_two_digits))
+  raw(df10.to_html(index=False))
+  p(raw(df11.to_html(index=False)))
+  raw(df12.to_html(na_rep='', float_format=make_zero_empty))
   raw('<img src="d12.png">')
+  p('Percentage of students')
+  raw(df13.to_html(na_rep='', float_format=make_zero_empty_two_digits))
+  raw('<img src="d13.png">')
 
   div(id='overall-4')
   h3('Grades 4 through 6')
-  p(raw(df20.to_html(index=False)))
-  raw(df21.to_html(na_rep='', float_format=make_zero_empty))
-  raw('<img src="d21.png">')
-  p('Percentage of students')
-  raw(df22.to_html(na_rep='', float_format=make_zero_empty_two_digits))
+  raw(df20.to_html(index=False))
+  p(raw(df21.to_html(index=False)))
+  raw(df22.to_html(na_rep='', float_format=make_zero_empty))
   raw('<img src="d22.png">')
+  p('Percentage of students')
+  raw(df23.to_html(na_rep='', float_format=make_zero_empty_two_digits))
+  raw('<img src="d23.png">')
 
   div(id='reasons')
   h2('Reasons for Referrals')
@@ -669,12 +721,12 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   div(id='parent-prek')
   h3('Pre-K through 3')
   raw(df300.to_html(na_rep='', index=False))
-  p(raw(df301.to_html(na_rep='')))
+  p(raw(df301.to_html(na_rep='', float_format=make_zero_empty)))
 
   div(id='parent-4')
   h3('Grades 4 through 6')
   raw(df310.to_html(na_rep='', index=False))
-  p(raw(df311.to_html(na_rep='')))
+  p(raw(df311.to_html(na_rep='', float_format=make_zero_empty)))
 
   div(id='suspension')
   h2('Suspension, Expulsion, Exclusion')
