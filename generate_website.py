@@ -609,6 +609,40 @@ sns_plot.set_ylabel("% of students")
 plt.savefig('d403.png', bbox_inches='tight')
 plt.clf()
 
+sqlstr = """
+SELECT eventName, RaceEthnicity, count(*) count
+FROM disc
+WHERE (
+  resolutionName like '%suspen%' OR
+  resolutionName like '%expelled%' OR
+  resolutionName like '%emergency%' OR
+  resolutionName like '%law enfor%'
+)
+AND Grade IN ('PK', 'KG', 1, 2, 3)
+COLLATE NOCASE
+GROUP BY 1, 2
+"""
+df410 = pd.read_sql_query(sqlstr, con)
+df410 = df410.pivot_table(index='eventName', columns='RaceEthnicity', values='count')
+print(df410.head())
+
+sqlstr = """
+SELECT eventName, RaceEthnicity, count(*) count
+FROM disc
+WHERE (
+  resolutionName like '%suspen%' OR
+  resolutionName like '%expelled%' OR
+  resolutionName like '%emergency%' OR
+  resolutionName like '%law enfor%'
+)
+AND Grade IN (4, 5, 6)
+COLLATE NOCASE
+GROUP BY 1, 2
+"""
+df420 = pd.read_sql_query(sqlstr, con)
+df420 = df420.pivot_table(index='eventName', columns='RaceEthnicity', values='count')
+print(df420.head())
+
 
 make_zero_empty = lambda x: '{0:.0f}'.format(x) if x > 0 else ''
 make_zero_empty_two_digits = lambda x: '{0:.2f}'.format(x) if x > 0 else ''
@@ -646,6 +680,10 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
         <li><a href="#parent-4"   >Grades 4 through 6</a></li>
       </ul>
       <li><a href="#suspension" >Suspension</a></li>
+      <ul>
+        <li><a href="#suspension-prek">Pre-K through 3</a></li>
+        <li><a href="#suspension-4"   >Grades 4 through 6</a></li>
+      </ul>
     </ul>
   """)
 
@@ -740,6 +778,13 @@ with document(title='Omaha Public Schools Referral (Disciplinary) Data 2018-2019
   p('Percentage of students:')
   p(raw(df403.to_html(na_rep='', float_format=make_zero_empty_two_digits)))
   raw('<img src="d403.png">')
+
+  div(id='suspension-prek')
+  h3('Pre-K through 3')
+  raw(df410.to_html(na_rep='', float_format=make_zero_empty))
+  div(id='suspension-4')
+  h3('Grades 4 through 6')
+  raw(df420.to_html(na_rep='', float_format=make_zero_empty))
 
   # for path in photos:
   #   div(img(src=path), _class='photo')
